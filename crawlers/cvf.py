@@ -1,52 +1,33 @@
-from crawlers.base import fetch_html, make_soup, absolute_url, extract_doi, dedup_papers
-from utils.normalize import clean_text
+from crawlers.base import make_soup, dedup_papers
+from utils.normalize import clean_text, abs_url
 
 
-def crawl_cvf(source: dict) -> list[dict]:
+def crawl_cvf(source: dict, html: str) -> list[dict]:
     url = source["url"]
-    html = fetch_html(url)
     soup = make_soup(html)
-
     papers = []
 
     for dt in soup.find_all("dt", class_="ptitle"):
-        title_tag = dt.find("a")
-        if not title_tag:
+        a = dt.find("a")
+        if not a:
             continue
-
-        title = clean_text(title_tag.get_text(" "))
+        title = clean_text(a.get_text(" "))
         authors = ""
         pdf_url = ""
-
-        siblings = []
         cur = dt
-
-        # CVF 通常结构：dt.ptitle + 若干 dd
         for _ in range(8):
             cur = cur.find_next_sibling()
             if cur is None:
                 break
-            siblings.append(cur)
-
-        for sib in siblings:
-            text = clean_text(sib.get_text(" "))
-
-            if sib.name == "dd" and not authors:
-                lower = text.lower()
-                if "pdf" not in lower and "abstract" not in lower and "supp" not in lower:
+            text = clean_text(cur.get_text(" "))
+            if cur.name == "dd" and not authors:
+                low = text.lower()
+                if "pdf" not in low and "abstract" not in low and "supp" not in low:
                     authors = text
-
-            for a in sib.find_all("a"):
-                label = clean_text(a.get_text(" ")).lower()
-                href = a.get("href", "")
-
+            for link in cur.find_all("a"):
+                label = clean_text(link.get_text(" ")).lower()
+                href = link.get("href", "")
                 if "pdf" in label or href.lower().endswith(".pdf"):
-                    pdf_url = absolute_url(url, href)
-
-        papers.append({
-            "title": title,
-            "authors": authors,
-            "pdf_url": pdf_url,
-        })
-
+                    pdf_url = abs_url(url, href)
+        papers.append({"title": title, "authors": authors, "pdf_url": pdf_url})
     return dedup_papers(papers)

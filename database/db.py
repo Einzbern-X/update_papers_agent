@@ -2,19 +2,15 @@ import sqlite3
 from pathlib import Path
 
 
-DEFAULT_DB_PATH = "data/papers.db"
-
-
-def get_conn(db_path: str = DEFAULT_DB_PATH):
+def get_conn(db_path: str = "data/papers.db"):
     path = Path(db_path)
     path.parent.mkdir(parents=True, exist_ok=True)
-
     conn = sqlite3.connect(path)
     conn.row_factory = sqlite3.Row
     return conn
 
 
-def init_db(db_path: str = DEFAULT_DB_PATH):
+def init_db(db_path: str = "data/papers.db"):
     conn = get_conn(db_path)
     cur = conn.cursor()
 
@@ -35,14 +31,28 @@ def init_db(db_path: str = DEFAULT_DB_PATH):
     """)
 
     cur.execute("""
-    CREATE INDEX IF NOT EXISTS idx_papers_venue_year
-    ON papers (venue, year)
+    CREATE TABLE IF NOT EXISTS sources (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        venue TEXT,
+        year INTEGER,
+        url TEXT NOT NULL,
+        parser TEXT,
+        structure_type TEXT,
+        status TEXT,
+        release_status TEXT,
+        last_hash TEXT,
+        last_checked_at TEXT,
+        last_success_at TEXT,
+        last_error TEXT,
+        paper_count INTEGER DEFAULT 0,
+        generated_rule_key TEXT,
+        UNIQUE(name, year, url)
+    )
     """)
 
-    cur.execute("""
-    CREATE INDEX IF NOT EXISTS idx_papers_normalized_title
-    ON papers (normalized_title)
-    """)
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_papers_venue_year ON papers(venue, year)")
+    cur.execute("CREATE INDEX IF NOT EXISTS idx_sources_status ON sources(status)")
 
     conn.commit()
     conn.close()

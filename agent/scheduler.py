@@ -1,32 +1,26 @@
 import time
 from datetime import datetime, timedelta
-
 from agent.paper_agent import PaperCrawlerAgent
 from utils.logger import get_logger
 
 
-def seconds_until_next_run(hour: int = 9, minute: int = 0) -> float:
+def seconds_until(hour: int, minute: int) -> float:
     now = datetime.now()
-    next_run = now.replace(hour=hour, minute=minute, second=0, microsecond=0)
-
-    if next_run <= now:
-        next_run += timedelta(days=1)
-
-    return (next_run - now).total_seconds()
+    target = now.replace(hour=hour, minute=minute, second=0, microsecond=0)
+    if target <= now:
+        target += timedelta(days=1)
+    return (target - now).total_seconds()
 
 
 def run_daily(config_path: str = "config.yaml", hour: int = 9, minute: int = 0):
     logger = get_logger()
-    logger.info("Scheduler started. Daily run time: %02d:%02d", hour, minute)
-
+    logger.info("Scheduler started: %02d:%02d", hour, minute)
     while True:
-        sleep_seconds = seconds_until_next_run(hour, minute)
-        logger.info("Sleeping %.0f seconds until next run", sleep_seconds)
-        time.sleep(sleep_seconds)
-
+        s = seconds_until(hour, minute)
+        logger.info("Sleep %.0f seconds", s)
+        time.sleep(s)
         try:
-            agent = PaperCrawlerAgent(config_path=config_path)
-            agent.run()
+            PaperCrawlerAgent(config_path).run()
         except Exception as e:
             logger.exception("Scheduled run failed: %s", e)
 
