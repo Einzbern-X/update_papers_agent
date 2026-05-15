@@ -1,5 +1,5 @@
 # 论文放榜监测 Agent 配置
-# 对外保存字段：venue, year, title, authors, pdf_url, source_url
+# 保存字段：venue, year, title, authors, pdf_url, source_url
 
 request:
   timeout: 30
@@ -36,12 +36,9 @@ agent:
   skip_done_sources: true
 
 sources:
-  # =========================
-  # 稳定来源：不用大模型判断，直接固定 parser。
-  # parser 抽不到足够论文，则记录 not_released_or_parser_failed。
-  # =========================
+
   # 2026
-  - name: "ECCV ECVA Papers"
+  - name: "ECCV 2026 ECVA Papers"
     venue: "ECCV"
     year: 2026
     url: "https://www.ecva.net/papers.php"
@@ -95,7 +92,7 @@ sources:
     use_llm: false
     enabled: true
   # 2025
-  - name: "ECCV ECVA Papers"
+  - name: "ECCV 2024 ECVA Papers"
     venue: "ECCV"
     year: 2024
     url: "https://www.ecva.net/papers.php"
@@ -122,10 +119,10 @@ sources:
     use_llm: false
     enabled: true
 
-  - name: "WACV 2026 CVF"
+  - name: "WACV 2025 CVF"
     venue: "WACV"
-    year: 2026
-    url: "https://openaccess.thecvf.com/WACV2026?day=all"
+    year: 2025
+    url: "https://openaccess.thecvf.com/WACV2025?day=all"
     parser: "cvf"
     structure_type: "stable"
     use_llm: false
@@ -149,10 +146,7 @@ sources:
     use_llm: false
     enabled: true
 
-  # =========================
-  # 变化来源：大模型判断是否放榜；放榜后固定 parser 不行，再生成当前页面专用规则。
-  # 默认关闭，你需要时改 enabled: true，并把 URL 改成当年真实页面。
-  # =========================
+
   - name: "KDD 2026 Research Track"
     venue: "KDD"
     year: 2026

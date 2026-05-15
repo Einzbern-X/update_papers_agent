@@ -27,7 +27,7 @@ def crawl_ecva(source: dict, html: str) -> list[dict]:
         if not title_tag:
             continue
         title = clean_text(title_tag.get_text(" "))
-        if not title or len(title) < 10:
+        if not title:
             continue
 
         authors = ""
