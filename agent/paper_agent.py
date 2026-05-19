@@ -168,6 +168,8 @@ class PaperCrawlerAgent:
         if not script_info:
             return [], False, "no_saved_script", ""
         papers = crawl_by_script(source, html, script_info)
+        if any(p.get("detail_url") and not p.get("pdf_url") for p in papers):
+            papers = self._enrich_papers_with_detail_pages(papers)
         valid, reason = validate_papers(papers, self.min_valid_paper_count, self.min_title_ratio)
         key = f"{source.get('venue', '')}_{source.get('year', '')}_{source.get('name', '')}"
         return papers, valid, reason, key
@@ -288,7 +290,10 @@ class PaperCrawlerAgent:
             }
         else:
             try:
-                search_result = search_release_url(self.llm_client_web, venue, year, search_query)
+                search_result = search_release_url(
+                    self.llm_client_web, venue, year, search_query,
+                    configured_url=source.get("url", ""),
+                )
             except Exception as e:
                 self.logger.warning("[Phase1] Search failed for %s: %s", name, e)
                 return None
@@ -319,6 +324,7 @@ class PaperCrawlerAgent:
         # 如果搜索到的 URL 和配置中不同，重新下载页面
         current_html = html
         current_url = source.get("url", "")
+        current_status = 200
         if discovered_url and discovered_url != current_url and confidence_p1 >= 0.5:
             self.logger.info("[Phase1] Fetching discovered URL: %s", discovered_url)
             try:
@@ -326,6 +332,7 @@ class PaperCrawlerAgent:
                 if new_status < 400:
                     current_html = new_html
                     current_url = discovered_url
+                    current_status = new_status
                 else:
                     self.logger.warning("[Phase1] Fetch returned %d for %s", new_status, discovered_url)
             except Exception as e:
@@ -347,6 +354,7 @@ class PaperCrawlerAgent:
         # 记录搜索发现的 URL，供 run_source 使用
         plan["_discovered_url"] = current_url
         plan["_discovered_html"] = current_html
+        plan["_discovered_status"] = current_status
         self.logger.info(
             "[Phase2] Plan for %s: has_titles=%s, has_authors=%s, has_pdf=%s, needs_detail=%s",
             name,
@@ -425,17 +433,12 @@ class PaperCrawlerAgent:
         crawl_plan = self._discover_page_crawl_plan(source, html)
 
         if crawl_plan is not None and not crawl_plan.get("found", True):
-            # 大模型 Phase1 搜索未找到放榜页，但配置 URL 本身 fetch 已成功（status < 400）
-            # → 降级 fallback：跳过 Phase1 判断，直接用配置 URL 继续 Phase2 分析 + 脚本生成
-            self.logger.warning(
-                "%s: Phase1 returned not-found (reason: %s), but config URL returned %d. "
-                "Falling back to config URL for Phase2 analysis.",
-                name, crawl_plan.get("not_released_reason", ""), status_code
-            )
-            crawl_plan["found"] = True
-            crawl_plan["url"] = url
-            crawl_plan["_discovered_url"] = url
-            crawl_plan["_discovered_html"] = html
+            reason = crawl_plan.get("not_released_reason") or crawl_plan.get("reason", "not_found")
+            update_source_status(source, "not_released", self.db_path,
+                                 release_status="not_released", last_hash=h,
+                                 last_error=reason, paper_count=0)
+            self.logger.info("%s variable source not released: %s", name, reason)
+            return
 
         # 如果 Phase 1 发现了新的 URL+HTML，使用它们
         if crawl_plan and crawl_plan.get("_discovered_url"):
@@ -447,6 +450,7 @@ class PaperCrawlerAgent:
                 source["url"] = discovered_url
                 url = discovered_url
                 html = discovered_html
+                status_code = int(crawl_plan.get("_discovered_status", status_code))
                 h = html_hash(html)
 
         page_info = inspect_page(source, html, status_code)

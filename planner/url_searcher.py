@@ -50,6 +50,8 @@ _SEARCH_SYSTEM_PROMPT = """
   - CFP/Important Dates = 未放榜，不算找到
   - Accepted Papers / Proceedings / Paper List = 放榜页面
 - 有的会议会有多个 track，找包含所有论文或主要 track 的那个页面。
+- 如果用户提供了配置中的候选 URL，必须把它当作候选页面一起核验。
+- found=true 只允许用于真正的论文列表页；CFP、Important Dates、空 Program、投稿系统页面都必须 found=false。
 
 ## 输出 JSON（必须严格遵守）
 {
@@ -66,7 +68,8 @@ _SEARCH_SYSTEM_PROMPT = """
 """
 
 
-def search_release_url(llm_client_web, venue: str, year: int, search_query: str) -> dict:
+def search_release_url(llm_client_web, venue: str, year: int, search_query: str,
+                       configured_url: str = "") -> dict:
     """
     Phase 1: 用大模型 web_search 工具搜索会议论文放榜页面 URL。
 
@@ -81,9 +84,11 @@ def search_release_url(llm_client_web, venue: str, year: int, search_query: str)
     """
     user_msg = (
         f"请联网搜索 **{venue} {year}** 会议的「已录用论文完整列表」页面（accepted papers page）。\n\n"
-        f"推荐搜索词：{search_query}\n\n"
+        f"推荐搜索词：{search_query}\n"
+        f"配置中的候选 URL：{configured_url or '(未提供)'}\n\n"
         f"注意：\n"
         f"- 必须使用 $web_search 工具，不要凭记忆。\n"
+        f"- 如果配置 URL 本身就是官方论文列表页，可以返回该 URL；否则不要因为它能访问就判定已放榜。\n"
         f"- 找到后验证这是真正的论文列表页，而不是 Call for Papers 页面。\n"
         f"- 如果还没放榜，请在 not_released_reason 中说明。\n"
         f"- 最终返回 JSON 格式结果。"

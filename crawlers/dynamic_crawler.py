@@ -29,6 +29,7 @@ _SAFE_BUILTINS = {
     "set", "tuple", "str", "int", "float", "bool", "None", "True", "False",
     "print", "isinstance", "hasattr", "getattr", "any", "all", "max", "min",
     "sorted", "reversed", "sum", "abs", "round", "repr", "type",
+    "Exception", "ValueError", "KeyError", "AttributeError", "IndexError",
 }
 
 
@@ -73,11 +74,15 @@ def _validate_papers(papers) -> list[dict]:
         title = clean_text(str(p.get("title", "")))
         if not title:  # 空标题不算论文
             continue
-        result.append({
+        item = {
             "title": title,
             "authors": clean_text(str(p.get("authors", ""))),
             "pdf_url": clean_text(str(p.get("pdf_url", ""))),
-        })
+        }
+        detail_url = clean_text(str(p.get("detail_url", "")))
+        if detail_url:
+            item["detail_url"] = detail_url
+        result.append(item)
     return result
 
 
