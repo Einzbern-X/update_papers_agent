@@ -16,7 +16,6 @@ venue,year,title,authors,pdf_url,source_url
 ## 安装
 
 ```bash
-cd paper_crawler_agent_llm_release
 python -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
