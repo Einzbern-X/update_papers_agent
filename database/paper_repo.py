@@ -1,10 +1,11 @@
 from pathlib import Path
 from datetime import datetime
 import pandas as pd
+from agent.contracts import PUBLIC_PAPER_FIELDS
 from database.db import get_conn
 from utils.normalize import clean_text, normalize_title
 
-PUBLIC_COLUMNS = ["venue", "year", "title", "authors", "pdf_url", "source_url"]
+PUBLIC_COLUMNS = list(PUBLIC_PAPER_FIELDS)
 
 
 def save_paper(paper: dict, db_path: str = "data/papers.db") -> str:

@@ -7,6 +7,8 @@ dynamic_crawler.py
 - 禁止网络请求、文件 IO、sys/os 等危险模块
 - 执行超时保护
 - 返回值必须是 list[dict]，每个 dict 必须有 "title"
+- 对外保存/导出字段固定只有 venue/year/title/authors/pdf_url/source_url；
+  detail_url 只允许作为 enrich 阶段的内部临时字段
 
 脚本生成格式约定（见 script_generator.py）：
     def extract_papers(html: str, base_url: str) -> list[dict]: ...
@@ -17,6 +19,7 @@ import types
 import logging
 from bs4 import BeautifulSoup
 import urllib.parse
+from agent.contracts import INTERNAL_DETAIL_URL_FIELD
 from crawlers.base import dedup_papers
 from utils.normalize import clean_text
 
@@ -79,9 +82,9 @@ def _validate_papers(papers) -> list[dict]:
             "authors": clean_text(str(p.get("authors", ""))),
             "pdf_url": clean_text(str(p.get("pdf_url", ""))),
         }
-        detail_url = clean_text(str(p.get("detail_url", "")))
+        detail_url = clean_text(str(p.get(INTERNAL_DETAIL_URL_FIELD, "")))
         if detail_url:
-            item["detail_url"] = detail_url
+            item[INTERNAL_DETAIL_URL_FIELD] = detail_url
         result.append(item)
     return result
 
@@ -96,7 +99,8 @@ def run_generated_script(script_code: str, html: str, base_url: str) -> list[dic
         base_url: 页面 URL，用于拼接相对路径
 
     Returns:
-        list[dict]: 提取到的论文列表，每个 dict 包含 title / authors / pdf_url
+        list[dict]: 提取到的论文列表，每个 dict 包含 title / authors / pdf_url，
+        可临时包含 detail_url 用于后续补全 pdf_url
     """
     if not script_code or not script_code.strip():
         logger.warning("dynamic_crawler: empty script_code")

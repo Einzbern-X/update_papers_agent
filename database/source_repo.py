@@ -1,15 +1,10 @@
 from datetime import datetime
+from agent.contracts import RELEASED_STATUSES
 from database.db import get_conn
 from utils.normalize import clean_text
 
 # 这些 status 代表已成功爬取过论文，下次可以跳过
-DONE_STATUSES = {
-    "released_fixed_parser",
-    "released_saved_rule",
-    "released_saved_script",
-    "released_generated_rule",
-    "released_generated_script",
-}
+DONE_STATUSES = RELEASED_STATUSES
 
 
 def get_source_status(source: dict, db_path: str = "data/papers.db") -> dict | None:

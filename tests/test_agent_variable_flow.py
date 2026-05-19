@@ -53,14 +53,12 @@ sources: []
             agent = PaperCrawlerAgent(str(config_path))
 
             with patch("agent.paper_agent.fetch_html", return_value=("<html>Call for Papers</html>", 200)), \
-                 patch.object(agent, "_discover_page_crawl_plan", return_value={
+                 patch.object(agent.release_discovery, "discover", return_value={
                      "found": False,
                      "not_released_reason": "only CFP page found",
                  }), \
-                 patch.object(agent, "_try_saved_script", side_effect=AssertionError("should not crawl")), \
-                 patch.object(agent, "_try_saved_rule", side_effect=AssertionError("should not crawl")), \
-                 patch.object(agent, "_try_fixed_parser", side_effect=AssertionError("should not crawl")), \
-                 patch.object(agent, "_generate_script_and_parse", side_effect=AssertionError("should not crawl")):
+                 patch.object(agent.extraction_pipeline, "extract_variable",
+                              side_effect=AssertionError("should not crawl")):
                 agent.run_source(source)
 
             status = get_source_status(source, str(db_path))

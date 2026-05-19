@@ -6,6 +6,7 @@ script_generator.py
 脚本约定：
 - 脚本中必须定义函数 `def extract_papers(html: str, base_url: str) -> list[dict]:`
 - 返回值是 list of dict，每个 dict 至少有 "title" 键，可选 "authors"、"pdf_url"
+- 最终保存和导出的公开字段固定只有 venue/year/title/authors/pdf_url/source_url
 - 脚本只能 import: re, bs4（BeautifulSoup）, urllib.parse
 - 脚本不能做网络请求
 """
@@ -153,7 +154,10 @@ def extract_papers(html: str, base_url: str) -> list[dict]:
 - "title": str（必须，论文标题，**只含标题文本，不含 DOI 或其他信息**）
 - "authors": str（可选，作者列表）
 - "pdf_url": str（可选，PDF 链接或 DOI URL）
-- "detail_url": str（可选，论文详情页 URL，当列表页没有 PDF 时提供）
+- "detail_url": str（可选，论文详情页 URL，当列表页没有 PDF 时提供；这是内部临时字段，只用于补全 pdf_url，不会保存或导出）
+
+最终保存/导出的公开字段固定只有：
+venue, year, title, authors, pdf_url, source_url
 
 ## 处理子页面的情况
 
