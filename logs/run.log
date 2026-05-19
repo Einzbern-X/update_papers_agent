@@ -158,3 +158,331 @@
 2026-05-15 15:13:59 | INFO | paper_crawler_agent | Skip disabled source: ACM MM 2026 Regular Papers
 2026-05-15 15:13:59 | INFO | paper_crawler_agent | Skip disabled source: SIGGRAPH 2026 Technical Papers
 2026-05-15 15:13:59 | INFO | paper_crawler_agent | Run finished
+2026-05-15 15:14:28 | INFO | paper_crawler_agent | Loaded 15 sources
+2026-05-15 15:14:28 | INFO | paper_crawler_agent | Checking source: ECCV 2026 ECVA Papers
+2026-05-15 15:14:28 | INFO | paper_crawler_agent | ✓ Skip already-done source: ECCV 2026 ECVA Papers (status=released_fixed_parser, papers=6166, last_success=2026-05-15 15:12:05)
+2026-05-15 15:14:28 | INFO | paper_crawler_agent | Checking source: CVPR 2026 CVF
+2026-05-15 15:14:29 | INFO | paper_crawler_agent | Checking source: ICCV 2026 CVF
+2026-05-15 15:14:30 | INFO | paper_crawler_agent | Checking source: WACV 2026 CVF
+2026-05-15 15:14:30 | INFO | paper_crawler_agent | ✓ Skip already-done source: WACV 2026 CVF (status=released_fixed_parser, papers=831, last_success=2026-05-15 15:12:14)
+2026-05-15 15:14:31 | INFO | paper_crawler_agent | Checking source: IJCAI 2026 Proceedings
+2026-05-15 15:14:32 | INFO | paper_crawler_agent | Checking source: NeurIPS 2026 Proceedings
+2026-05-15 15:14:33 | INFO | paper_crawler_agent | Checking source: ECCV 2024 ECVA Papers
+2026-05-15 15:14:33 | INFO | paper_crawler_agent | ✓ Skip already-done source: ECCV 2024 ECVA Papers (status=released_fixed_parser, papers=6166, last_success=2026-05-15 15:12:50)
+2026-05-15 15:14:33 | INFO | paper_crawler_agent | Checking source: CVPR 2025 CVF
+2026-05-15 15:14:33 | INFO | paper_crawler_agent | ✓ Skip already-done source: CVPR 2025 CVF (status=released_fixed_parser, papers=2871, last_success=2026-05-15 15:13:07)
+2026-05-15 15:14:33 | INFO | paper_crawler_agent | Checking source: ICCV 2025 CVF
+2026-05-15 15:14:33 | INFO | paper_crawler_agent | ✓ Skip already-done source: ICCV 2025 CVF (status=released_fixed_parser, papers=2701, last_success=2026-05-15 15:13:22)
+2026-05-15 15:14:33 | INFO | paper_crawler_agent | Checking source: WACV 2025 CVF
+2026-05-15 15:14:38 | INFO | paper_crawler_agent | WACV 2025 CVF stable ok. papers=929 inserted=929 updated=0 skipped=0
+2026-05-15 15:14:38 | INFO | paper_crawler_agent | Checking source: IJCAI 2025 Proceedings
+2026-05-15 15:14:38 | INFO | paper_crawler_agent | ✓ Skip already-done source: IJCAI 2025 Proceedings (status=released_fixed_parser, papers=1279, last_success=2026-05-15 15:13:29)
+2026-05-15 15:14:38 | INFO | paper_crawler_agent | Checking source: NeurIPS 2025 Proceedings
+2026-05-15 15:14:38 | INFO | paper_crawler_agent | ✓ Skip already-done source: NeurIPS 2025 Proceedings (status=released_fixed_parser, papers=5823, last_success=2026-05-15 15:13:58)
+2026-05-15 15:14:39 | INFO | paper_crawler_agent | Skip disabled source: KDD 2026 Research Track
+2026-05-15 15:14:39 | INFO | paper_crawler_agent | Skip disabled source: ACM MM 2026 Regular Papers
+2026-05-15 15:14:39 | INFO | paper_crawler_agent | Skip disabled source: SIGGRAPH 2026 Technical Papers
+2026-05-15 15:14:39 | INFO | paper_crawler_agent | Run finished
+2026-05-15 15:16:44 | INFO | paper_crawler_agent | Loaded 15 sources
+2026-05-15 15:16:44 | INFO | paper_crawler_agent | Checking source: ECCV 2026 ECVA Papers
+2026-05-15 15:16:44 | INFO | paper_crawler_agent | ✓ Skip already-done source: ECCV 2026 ECVA Papers (status=released_fixed_parser, papers=6166, last_success=2026-05-15 15:12:05)
+2026-05-15 15:16:44 | INFO | paper_crawler_agent | Checking source: CVPR 2026 CVF
+2026-05-15 15:16:45 | INFO | paper_crawler_agent | Checking source: ICCV 2026 CVF
+2026-05-15 15:16:46 | INFO | paper_crawler_agent | Checking source: WACV 2026 CVF
+2026-05-15 15:16:46 | INFO | paper_crawler_agent | ✓ Skip already-done source: WACV 2026 CVF (status=released_fixed_parser, papers=831, last_success=2026-05-15 15:12:14)
+2026-05-15 15:16:46 | INFO | paper_crawler_agent | Checking source: IJCAI 2026 Proceedings
+2026-05-15 15:16:47 | INFO | paper_crawler_agent | Checking source: NeurIPS 2026 Proceedings
+2026-05-15 15:16:49 | INFO | paper_crawler_agent | Checking source: ECCV 2024 ECVA Papers
+2026-05-15 15:16:49 | INFO | paper_crawler_agent | ✓ Skip already-done source: ECCV 2024 ECVA Papers (status=released_fixed_parser, papers=6166, last_success=2026-05-15 15:12:50)
+2026-05-15 15:16:49 | INFO | paper_crawler_agent | Checking source: CVPR 2025 CVF
+2026-05-15 15:16:49 | INFO | paper_crawler_agent | ✓ Skip already-done source: CVPR 2025 CVF (status=released_fixed_parser, papers=2871, last_success=2026-05-15 15:13:07)
+2026-05-15 15:16:49 | INFO | paper_crawler_agent | Checking source: ICCV 2025 CVF
+2026-05-15 15:16:49 | INFO | paper_crawler_agent | ✓ Skip already-done source: ICCV 2025 CVF (status=released_fixed_parser, papers=2701, last_success=2026-05-15 15:13:22)
+2026-05-15 15:16:49 | INFO | paper_crawler_agent | Checking source: WACV 2025 CVF
+2026-05-15 15:16:49 | INFO | paper_crawler_agent | ✓ Skip already-done source: WACV 2025 CVF (status=released_fixed_parser, papers=929, last_success=2026-05-15 15:14:38)
+2026-05-15 15:16:49 | INFO | paper_crawler_agent | Checking source: IJCAI 2025 Proceedings
+2026-05-15 15:16:49 | INFO | paper_crawler_agent | ✓ Skip already-done source: IJCAI 2025 Proceedings (status=released_fixed_parser, papers=1279, last_success=2026-05-15 15:13:29)
+2026-05-15 15:16:50 | INFO | paper_crawler_agent | Checking source: NeurIPS 2025 Proceedings
+2026-05-15 15:16:50 | INFO | paper_crawler_agent | ✓ Skip already-done source: NeurIPS 2025 Proceedings (status=released_fixed_parser, papers=5823, last_success=2026-05-15 15:13:58)
+2026-05-15 15:16:50 | INFO | paper_crawler_agent | Checking source: KDD 2025 Research Track
+2026-05-15 15:16:52 | INFO | paper_crawler_agent | LLMClientWeb not available, skip discovery for: KDD 2025 Research Track
+2026-05-15 15:16:52 | INFO | paper_crawler_agent | KDD 2025 Research Track release status unknown: {'status': 'unknown', 'reason': 'llm_not_available', 'confidence': 0.0}
+2026-05-15 15:16:52 | INFO | paper_crawler_agent | Skip disabled source: ACM MM 2026 Regular Papers
+2026-05-15 15:16:52 | INFO | paper_crawler_agent | Skip disabled source: SIGGRAPH 2026 Technical Papers
+2026-05-15 15:16:52 | INFO | paper_crawler_agent | Run finished
+2026-05-15 15:20:31 | INFO | paper_crawler_agent | Loaded 15 sources
+2026-05-15 15:20:31 | INFO | paper_crawler_agent | Checking source: ECCV 2026 ECVA Papers
+2026-05-15 15:20:31 | INFO | paper_crawler_agent | ✓ Skip already-done source: ECCV 2026 ECVA Papers (status=released_fixed_parser, papers=6166, last_success=2026-05-15 15:12:05)
+2026-05-15 15:20:31 | INFO | paper_crawler_agent | Checking source: CVPR 2026 CVF
+2026-05-15 15:20:32 | INFO | paper_crawler_agent | Checking source: ICCV 2026 CVF
+2026-05-15 15:20:34 | INFO | paper_crawler_agent | Checking source: WACV 2026 CVF
+2026-05-15 15:20:34 | INFO | paper_crawler_agent | ✓ Skip already-done source: WACV 2026 CVF (status=released_fixed_parser, papers=831, last_success=2026-05-15 15:12:14)
+2026-05-15 15:20:34 | INFO | paper_crawler_agent | Checking source: IJCAI 2026 Proceedings
+2026-05-15 15:20:35 | INFO | paper_crawler_agent | Checking source: NeurIPS 2026 Proceedings
+2026-05-15 15:20:36 | INFO | paper_crawler_agent | Checking source: ECCV 2024 ECVA Papers
+2026-05-15 15:20:36 | INFO | paper_crawler_agent | ✓ Skip already-done source: ECCV 2024 ECVA Papers (status=released_fixed_parser, papers=6166, last_success=2026-05-15 15:12:50)
+2026-05-15 15:20:36 | INFO | paper_crawler_agent | Checking source: CVPR 2025 CVF
+2026-05-15 15:20:36 | INFO | paper_crawler_agent | ✓ Skip already-done source: CVPR 2025 CVF (status=released_fixed_parser, papers=2871, last_success=2026-05-15 15:13:07)
+2026-05-15 15:20:37 | INFO | paper_crawler_agent | Checking source: ICCV 2025 CVF
+2026-05-15 15:20:37 | INFO | paper_crawler_agent | ✓ Skip already-done source: ICCV 2025 CVF (status=released_fixed_parser, papers=2701, last_success=2026-05-15 15:13:22)
+2026-05-15 15:20:37 | INFO | paper_crawler_agent | Checking source: WACV 2025 CVF
+2026-05-15 15:20:37 | INFO | paper_crawler_agent | ✓ Skip already-done source: WACV 2025 CVF (status=released_fixed_parser, papers=929, last_success=2026-05-15 15:14:38)
+2026-05-15 15:20:37 | INFO | paper_crawler_agent | Checking source: IJCAI 2025 Proceedings
+2026-05-15 15:20:37 | INFO | paper_crawler_agent | ✓ Skip already-done source: IJCAI 2025 Proceedings (status=released_fixed_parser, papers=1279, last_success=2026-05-15 15:13:29)
+2026-05-15 15:20:37 | INFO | paper_crawler_agent | Checking source: NeurIPS 2025 Proceedings
+2026-05-15 15:20:37 | INFO | paper_crawler_agent | ✓ Skip already-done source: NeurIPS 2025 Proceedings (status=released_fixed_parser, papers=5823, last_success=2026-05-15 15:13:58)
+2026-05-15 15:20:37 | INFO | paper_crawler_agent | Checking source: KDD 2025 Research Track
+2026-05-15 15:20:40 | INFO | paper_crawler_agent | [Phase1] Searching release URL for KDD 2025 Research Track ...
+2026-05-15 15:20:43 | WARNING | paper_crawler_agent | [Phase1] Search failed for KDD 2025 Research Track: Error code: 400 - {'error': {'message': 'invalid temperature: only 0.6 is allowed for this model', 'type': 'invalid_request_error'}}
+2026-05-15 15:20:43 | ERROR | paper_crawler_agent | LLM release judge failed: KDD 2025 Research Track
+Traceback (most recent call last):
+  File "/Users/einzbern/Documents/code/update_paper_agent/agent/paper_agent.py", line 410, in run_source
+    release_judge = self._llm_release_judge(source, page_info, html)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/einzbern/Documents/code/update_paper_agent/agent/paper_agent.py", line 219, in _llm_release_judge
+    return judge_release_status(self.llm_client, page_info, html, max_html_chars=max_html_chars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/einzbern/Documents/code/update_paper_agent/planner/release_judge.py", line 47, in judge_release_status
+    result = llm_client.chat_json(SYSTEM_PROMPT, json.dumps(payload, ensure_ascii=False, indent=2))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/einzbern/Documents/code/update_paper_agent/planner/llm_client.py", line 38, in chat_json
+    resp.raise_for_status()
+  File "/Users/einzbern/miniconda3/envs/all-in-rag/lib/python3.12/site-packages/requests/models.py", line 1028, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://api.moonshot.cn/v1/chat/completions
+2026-05-15 15:20:43 | INFO | paper_crawler_agent | Skip disabled source: ACM MM 2026 Regular Papers
+2026-05-15 15:20:43 | INFO | paper_crawler_agent | Skip disabled source: SIGGRAPH 2026 Technical Papers
+2026-05-15 15:20:43 | INFO | paper_crawler_agent | Run finished
+2026-05-15 15:22:01 | INFO | paper_crawler_agent | Loaded 15 sources
+2026-05-15 15:22:01 | INFO | paper_crawler_agent | Checking source: ECCV 2026 ECVA Papers
+2026-05-15 15:22:01 | INFO | paper_crawler_agent | ✓ Skip already-done source: ECCV 2026 ECVA Papers (status=released_fixed_parser, papers=6166, last_success=2026-05-15 15:12:05)
+2026-05-15 15:22:01 | INFO | paper_crawler_agent | Checking source: CVPR 2026 CVF
+2026-05-15 15:22:03 | INFO | paper_crawler_agent | Checking source: ICCV 2026 CVF
+2026-05-15 15:22:04 | INFO | paper_crawler_agent | Checking source: WACV 2026 CVF
+2026-05-15 15:22:04 | INFO | paper_crawler_agent | ✓ Skip already-done source: WACV 2026 CVF (status=released_fixed_parser, papers=831, last_success=2026-05-15 15:12:14)
+2026-05-15 15:22:04 | INFO | paper_crawler_agent | Checking source: IJCAI 2026 Proceedings
+2026-05-15 15:22:05 | INFO | paper_crawler_agent | Checking source: NeurIPS 2026 Proceedings
+2026-05-15 15:22:06 | INFO | paper_crawler_agent | Checking source: ECCV 2024 ECVA Papers
+2026-05-15 15:22:06 | INFO | paper_crawler_agent | ✓ Skip already-done source: ECCV 2024 ECVA Papers (status=released_fixed_parser, papers=6166, last_success=2026-05-15 15:12:50)
+2026-05-15 15:22:06 | INFO | paper_crawler_agent | Checking source: CVPR 2025 CVF
+2026-05-15 15:22:06 | INFO | paper_crawler_agent | ✓ Skip already-done source: CVPR 2025 CVF (status=released_fixed_parser, papers=2871, last_success=2026-05-15 15:13:07)
+2026-05-15 15:22:06 | INFO | paper_crawler_agent | Checking source: ICCV 2025 CVF
+2026-05-15 15:22:06 | INFO | paper_crawler_agent | ✓ Skip already-done source: ICCV 2025 CVF (status=released_fixed_parser, papers=2701, last_success=2026-05-15 15:13:22)
+2026-05-15 15:22:07 | INFO | paper_crawler_agent | Checking source: WACV 2025 CVF
+2026-05-15 15:22:07 | INFO | paper_crawler_agent | ✓ Skip already-done source: WACV 2025 CVF (status=released_fixed_parser, papers=929, last_success=2026-05-15 15:14:38)
+2026-05-15 15:22:07 | INFO | paper_crawler_agent | Checking source: IJCAI 2025 Proceedings
+2026-05-15 15:22:07 | INFO | paper_crawler_agent | ✓ Skip already-done source: IJCAI 2025 Proceedings (status=released_fixed_parser, papers=1279, last_success=2026-05-15 15:13:29)
+2026-05-15 15:22:07 | INFO | paper_crawler_agent | Checking source: NeurIPS 2025 Proceedings
+2026-05-15 15:22:07 | INFO | paper_crawler_agent | ✓ Skip already-done source: NeurIPS 2025 Proceedings (status=released_fixed_parser, papers=5823, last_success=2026-05-15 15:13:58)
+2026-05-15 15:22:07 | INFO | paper_crawler_agent | Checking source: KDD 2025 Research Track
+2026-05-15 15:22:09 | INFO | paper_crawler_agent | [Phase1] Searching release URL for KDD 2025 Research Track ...
+2026-05-15 15:22:11 | WARNING | paper_crawler_agent | [Phase1] Search failed for KDD 2025 Research Track: Error code: 401 - {'error': {'message': 'Invalid Authentication', 'type': 'invalid_authentication_error'}}
+2026-05-15 15:22:11 | ERROR | paper_crawler_agent | LLM release judge failed: KDD 2025 Research Track
+Traceback (most recent call last):
+  File "/Users/einzbern/Documents/code/update_paper_agent/agent/paper_agent.py", line 410, in run_source
+    release_judge = self._llm_release_judge(source, page_info, html)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/einzbern/Documents/code/update_paper_agent/agent/paper_agent.py", line 219, in _llm_release_judge
+    return judge_release_status(self.llm_client, page_info, html, max_html_chars=max_html_chars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/einzbern/Documents/code/update_paper_agent/planner/release_judge.py", line 47, in judge_release_status
+    result = llm_client.chat_json(SYSTEM_PROMPT, json.dumps(payload, ensure_ascii=False, indent=2))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/einzbern/Documents/code/update_paper_agent/planner/llm_client.py", line 38, in chat_json
+    resp.raise_for_status()
+  File "/Users/einzbern/miniconda3/envs/all-in-rag/lib/python3.12/site-packages/requests/models.py", line 1028, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 401 Client Error: Unauthorized for url: https://api.moonshot.ai/v1/chat/completions
+2026-05-15 15:22:11 | INFO | paper_crawler_agent | Skip disabled source: ACM MM 2026 Regular Papers
+2026-05-15 15:22:11 | INFO | paper_crawler_agent | Skip disabled source: SIGGRAPH 2026 Technical Papers
+2026-05-15 15:22:11 | INFO | paper_crawler_agent | Run finished
+2026-05-15 15:22:35 | INFO | paper_crawler_agent | Loaded 15 sources
+2026-05-15 15:22:35 | INFO | paper_crawler_agent | Checking source: ECCV 2026 ECVA Papers
+2026-05-15 15:22:35 | INFO | paper_crawler_agent | ✓ Skip already-done source: ECCV 2026 ECVA Papers (status=released_fixed_parser, papers=6166, last_success=2026-05-15 15:12:05)
+2026-05-15 15:22:35 | INFO | paper_crawler_agent | Checking source: CVPR 2026 CVF
+2026-05-15 15:22:36 | INFO | paper_crawler_agent | Checking source: ICCV 2026 CVF
+2026-05-15 15:22:37 | INFO | paper_crawler_agent | Checking source: WACV 2026 CVF
+2026-05-15 15:22:37 | INFO | paper_crawler_agent | ✓ Skip already-done source: WACV 2026 CVF (status=released_fixed_parser, papers=831, last_success=2026-05-15 15:12:14)
+2026-05-15 15:22:37 | INFO | paper_crawler_agent | Checking source: IJCAI 2026 Proceedings
+2026-05-15 15:22:38 | INFO | paper_crawler_agent | Checking source: NeurIPS 2026 Proceedings
+2026-05-15 15:22:39 | INFO | paper_crawler_agent | Checking source: ECCV 2024 ECVA Papers
+2026-05-15 15:22:39 | INFO | paper_crawler_agent | ✓ Skip already-done source: ECCV 2024 ECVA Papers (status=released_fixed_parser, papers=6166, last_success=2026-05-15 15:12:50)
+2026-05-15 15:22:40 | INFO | paper_crawler_agent | Checking source: CVPR 2025 CVF
+2026-05-15 15:22:40 | INFO | paper_crawler_agent | ✓ Skip already-done source: CVPR 2025 CVF (status=released_fixed_parser, papers=2871, last_success=2026-05-15 15:13:07)
+2026-05-15 15:22:40 | INFO | paper_crawler_agent | Checking source: ICCV 2025 CVF
+2026-05-15 15:22:40 | INFO | paper_crawler_agent | ✓ Skip already-done source: ICCV 2025 CVF (status=released_fixed_parser, papers=2701, last_success=2026-05-15 15:13:22)
+2026-05-15 15:22:40 | INFO | paper_crawler_agent | Checking source: WACV 2025 CVF
+2026-05-15 15:22:40 | INFO | paper_crawler_agent | ✓ Skip already-done source: WACV 2025 CVF (status=released_fixed_parser, papers=929, last_success=2026-05-15 15:14:38)
+2026-05-15 15:22:40 | INFO | paper_crawler_agent | Checking source: IJCAI 2025 Proceedings
+2026-05-15 15:22:40 | INFO | paper_crawler_agent | ✓ Skip already-done source: IJCAI 2025 Proceedings (status=released_fixed_parser, papers=1279, last_success=2026-05-15 15:13:29)
+2026-05-15 15:22:40 | INFO | paper_crawler_agent | Checking source: NeurIPS 2025 Proceedings
+2026-05-15 15:22:40 | INFO | paper_crawler_agent | ✓ Skip already-done source: NeurIPS 2025 Proceedings (status=released_fixed_parser, papers=5823, last_success=2026-05-15 15:13:58)
+2026-05-15 15:22:41 | INFO | paper_crawler_agent | Checking source: KDD 2025 Research Track
+2026-05-15 15:22:43 | INFO | paper_crawler_agent | [Phase1] Searching release URL for KDD 2025 Research Track ...
+2026-05-15 15:22:43 | WARNING | paper_crawler_agent | [Phase1] Search failed for KDD 2025 Research Track: Error code: 400 - {'error': {'message': 'invalid temperature: only 0.6 is allowed for this model', 'type': 'invalid_request_error'}}
+2026-05-15 15:22:43 | ERROR | paper_crawler_agent | LLM release judge failed: KDD 2025 Research Track
+Traceback (most recent call last):
+  File "/Users/einzbern/Documents/code/update_paper_agent/agent/paper_agent.py", line 410, in run_source
+    release_judge = self._llm_release_judge(source, page_info, html)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/einzbern/Documents/code/update_paper_agent/agent/paper_agent.py", line 219, in _llm_release_judge
+    return judge_release_status(self.llm_client, page_info, html, max_html_chars=max_html_chars)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/einzbern/Documents/code/update_paper_agent/planner/release_judge.py", line 47, in judge_release_status
+    result = llm_client.chat_json(SYSTEM_PROMPT, json.dumps(payload, ensure_ascii=False, indent=2))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/einzbern/Documents/code/update_paper_agent/planner/llm_client.py", line 38, in chat_json
+    resp.raise_for_status()
+  File "/Users/einzbern/miniconda3/envs/all-in-rag/lib/python3.12/site-packages/requests/models.py", line 1028, in raise_for_status
+    raise HTTPError(http_error_msg, response=self)
+requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://api.moonshot.cn/v1/chat/completions
+2026-05-15 15:22:44 | INFO | paper_crawler_agent | Skip disabled source: ACM MM 2026 Regular Papers
+2026-05-15 15:22:44 | INFO | paper_crawler_agent | Skip disabled source: SIGGRAPH 2026 Technical Papers
+2026-05-15 15:22:44 | INFO | paper_crawler_agent | Run finished
+2026-05-15 15:23:33 | INFO | paper_crawler_agent | Loaded 15 sources
+2026-05-15 15:23:33 | INFO | paper_crawler_agent | Checking source: ECCV 2026 ECVA Papers
+2026-05-15 15:23:33 | INFO | paper_crawler_agent | ✓ Skip already-done source: ECCV 2026 ECVA Papers (status=released_fixed_parser, papers=6166, last_success=2026-05-15 15:12:05)
+2026-05-15 15:23:33 | INFO | paper_crawler_agent | Checking source: CVPR 2026 CVF
+2026-05-15 15:23:35 | INFO | paper_crawler_agent | Checking source: ICCV 2026 CVF
+2026-05-15 15:23:36 | INFO | paper_crawler_agent | Checking source: WACV 2026 CVF
+2026-05-15 15:23:36 | INFO | paper_crawler_agent | ✓ Skip already-done source: WACV 2026 CVF (status=released_fixed_parser, papers=831, last_success=2026-05-15 15:12:14)
+2026-05-15 15:23:36 | INFO | paper_crawler_agent | Checking source: IJCAI 2026 Proceedings
+2026-05-15 15:23:37 | INFO | paper_crawler_agent | Checking source: NeurIPS 2026 Proceedings
+2026-05-15 15:23:38 | INFO | paper_crawler_agent | Checking source: ECCV 2024 ECVA Papers
+2026-05-15 15:23:38 | INFO | paper_crawler_agent | ✓ Skip already-done source: ECCV 2024 ECVA Papers (status=released_fixed_parser, papers=6166, last_success=2026-05-15 15:12:50)
+2026-05-15 15:23:39 | INFO | paper_crawler_agent | Checking source: CVPR 2025 CVF
+2026-05-15 15:23:39 | INFO | paper_crawler_agent | ✓ Skip already-done source: CVPR 2025 CVF (status=released_fixed_parser, papers=2871, last_success=2026-05-15 15:13:07)
+2026-05-15 15:23:39 | INFO | paper_crawler_agent | Checking source: ICCV 2025 CVF
+2026-05-15 15:23:39 | INFO | paper_crawler_agent | ✓ Skip already-done source: ICCV 2025 CVF (status=released_fixed_parser, papers=2701, last_success=2026-05-15 15:13:22)
+2026-05-15 15:23:39 | INFO | paper_crawler_agent | Checking source: WACV 2025 CVF
+2026-05-15 15:23:39 | INFO | paper_crawler_agent | ✓ Skip already-done source: WACV 2025 CVF (status=released_fixed_parser, papers=929, last_success=2026-05-15 15:14:38)
+2026-05-15 15:23:39 | INFO | paper_crawler_agent | Checking source: IJCAI 2025 Proceedings
+2026-05-15 15:23:39 | INFO | paper_crawler_agent | ✓ Skip already-done source: IJCAI 2025 Proceedings (status=released_fixed_parser, papers=1279, last_success=2026-05-15 15:13:29)
+2026-05-15 15:23:39 | INFO | paper_crawler_agent | Checking source: NeurIPS 2025 Proceedings
+2026-05-15 15:23:39 | INFO | paper_crawler_agent | ✓ Skip already-done source: NeurIPS 2025 Proceedings (status=released_fixed_parser, papers=5823, last_success=2026-05-15 15:13:58)
+2026-05-15 15:23:40 | INFO | paper_crawler_agent | Checking source: KDD 2025 Research Track
+2026-05-15 15:23:42 | INFO | paper_crawler_agent | [Phase1] Searching release URL for KDD 2025 Research Track ...
+2026-05-15 15:23:50 | INFO | paper_crawler_agent | [Phase1] KDD 2025 Research Track not released yet: 
+2026-05-15 15:23:50 | INFO | paper_crawler_agent | KDD 2025 Research Track: not released. reason: not_found
+2026-05-15 15:23:50 | INFO | paper_crawler_agent | Skip disabled source: ACM MM 2026 Regular Papers
+2026-05-15 15:23:50 | INFO | paper_crawler_agent | Skip disabled source: SIGGRAPH 2026 Technical Papers
+2026-05-15 15:23:50 | INFO | paper_crawler_agent | Run finished
+2026-05-15 15:26:57 | INFO | paper_crawler_agent | Loaded 15 sources
+2026-05-15 15:26:57 | INFO | paper_crawler_agent | Checking source: ECCV 2026 ECVA Papers
+2026-05-15 15:26:57 | INFO | paper_crawler_agent | ✓ Skip already-done source: ECCV 2026 ECVA Papers (status=released_fixed_parser, papers=6166, last_success=2026-05-15 15:12:05)
+2026-05-15 15:26:57 | INFO | paper_crawler_agent | Checking source: CVPR 2026 CVF
+2026-05-15 15:26:59 | INFO | paper_crawler_agent | Checking source: ICCV 2026 CVF
+2026-05-15 15:27:00 | INFO | paper_crawler_agent | Checking source: WACV 2026 CVF
+2026-05-15 15:27:00 | INFO | paper_crawler_agent | ✓ Skip already-done source: WACV 2026 CVF (status=released_fixed_parser, papers=831, last_success=2026-05-15 15:12:14)
+2026-05-15 15:27:00 | INFO | paper_crawler_agent | Checking source: IJCAI 2026 Proceedings
+2026-05-15 15:27:01 | INFO | paper_crawler_agent | Checking source: NeurIPS 2026 Proceedings
+2026-05-15 15:27:02 | INFO | paper_crawler_agent | Checking source: ECCV 2024 ECVA Papers
+2026-05-15 15:27:02 | INFO | paper_crawler_agent | ✓ Skip already-done source: ECCV 2024 ECVA Papers (status=released_fixed_parser, papers=6166, last_success=2026-05-15 15:12:50)
+2026-05-15 15:27:03 | INFO | paper_crawler_agent | Checking source: CVPR 2025 CVF
+2026-05-15 15:27:03 | INFO | paper_crawler_agent | ✓ Skip already-done source: CVPR 2025 CVF (status=released_fixed_parser, papers=2871, last_success=2026-05-15 15:13:07)
+2026-05-15 15:27:03 | INFO | paper_crawler_agent | Checking source: ICCV 2025 CVF
+2026-05-15 15:27:03 | INFO | paper_crawler_agent | ✓ Skip already-done source: ICCV 2025 CVF (status=released_fixed_parser, papers=2701, last_success=2026-05-15 15:13:22)
+2026-05-15 15:27:03 | INFO | paper_crawler_agent | Checking source: WACV 2025 CVF
+2026-05-15 15:27:03 | INFO | paper_crawler_agent | ✓ Skip already-done source: WACV 2025 CVF (status=released_fixed_parser, papers=929, last_success=2026-05-15 15:14:38)
+2026-05-15 15:27:03 | INFO | paper_crawler_agent | Checking source: IJCAI 2025 Proceedings
+2026-05-15 15:27:03 | INFO | paper_crawler_agent | ✓ Skip already-done source: IJCAI 2025 Proceedings (status=released_fixed_parser, papers=1279, last_success=2026-05-15 15:13:29)
+2026-05-15 15:27:03 | INFO | paper_crawler_agent | Checking source: NeurIPS 2025 Proceedings
+2026-05-15 15:27:03 | INFO | paper_crawler_agent | ✓ Skip already-done source: NeurIPS 2025 Proceedings (status=released_fixed_parser, papers=5823, last_success=2026-05-15 15:13:58)
+2026-05-15 15:27:04 | INFO | paper_crawler_agent | Checking source: KDD 2025 Research Track
+2026-05-15 15:27:06 | INFO | paper_crawler_agent | [Phase1] Searching release URL for KDD 2025 Research Track ...
+2026-05-15 15:27:06 | INFO | paper_crawler_agent | [Phase1] skip_url_search=true, using config URL directly: https://kdd2025.kdd.org/research-track-papers/
+2026-05-15 15:27:06 | INFO | paper_crawler_agent | [Phase1] Found URL: https://kdd2025.kdd.org/research-track-papers/ (confidence=1.00)
+2026-05-15 15:27:06 | INFO | paper_crawler_agent | [Phase2] Analyzing page structure for KDD 2025 Research Track ...
+2026-05-15 15:27:16 | INFO | paper_crawler_agent | [Phase2] Plan for KDD 2025 Research Track: has_titles=False, has_authors=False, has_pdf=False, needs_detail=False
+2026-05-15 15:27:19 | INFO | paper_crawler_agent | KDD 2025 Research Track fixed parser ok. papers=813 inserted=813 updated=0 skipped=0
+2026-05-15 15:27:20 | INFO | paper_crawler_agent | Skip disabled source: ACM MM 2026 Regular Papers
+2026-05-15 15:27:20 | INFO | paper_crawler_agent | Skip disabled source: SIGGRAPH 2026 Technical Papers
+2026-05-15 15:27:20 | INFO | paper_crawler_agent | Run finished
+2026-05-15 15:40:36 | INFO | paper_crawler_agent | Loaded 15 sources
+2026-05-15 15:40:36 | INFO | paper_crawler_agent | Checking source: ECCV 2026 ECVA Papers
+2026-05-15 15:40:36 | INFO | paper_crawler_agent | ✓ Skip already-done source: ECCV 2026 ECVA Papers (status=released_fixed_parser, papers=6166, last_success=2026-05-15 15:12:05)
+2026-05-15 15:40:37 | INFO | paper_crawler_agent | Checking source: CVPR 2026 CVF
+2026-05-15 15:40:38 | INFO | paper_crawler_agent | Checking source: ICCV 2026 CVF
+2026-05-15 15:40:39 | INFO | paper_crawler_agent | Checking source: WACV 2026 CVF
+2026-05-15 15:40:39 | INFO | paper_crawler_agent | ✓ Skip already-done source: WACV 2026 CVF (status=released_fixed_parser, papers=831, last_success=2026-05-15 15:12:14)
+2026-05-15 15:40:39 | INFO | paper_crawler_agent | Checking source: IJCAI 2026 Proceedings
+2026-05-15 15:40:40 | INFO | paper_crawler_agent | Checking source: NeurIPS 2026 Proceedings
+2026-05-15 15:40:42 | INFO | paper_crawler_agent | Checking source: ECCV 2024 ECVA Papers
+2026-05-15 15:40:42 | INFO | paper_crawler_agent | ✓ Skip already-done source: ECCV 2024 ECVA Papers (status=released_fixed_parser, papers=6166, last_success=2026-05-15 15:12:50)
+2026-05-15 15:40:42 | INFO | paper_crawler_agent | Checking source: CVPR 2025 CVF
+2026-05-15 15:40:42 | INFO | paper_crawler_agent | ✓ Skip already-done source: CVPR 2025 CVF (status=released_fixed_parser, papers=2871, last_success=2026-05-15 15:13:07)
+2026-05-15 15:40:42 | INFO | paper_crawler_agent | Checking source: ICCV 2025 CVF
+2026-05-15 15:40:42 | INFO | paper_crawler_agent | ✓ Skip already-done source: ICCV 2025 CVF (status=released_fixed_parser, papers=2701, last_success=2026-05-15 15:13:22)
+2026-05-15 15:40:42 | INFO | paper_crawler_agent | Checking source: WACV 2025 CVF
+2026-05-15 15:40:42 | INFO | paper_crawler_agent | ✓ Skip already-done source: WACV 2025 CVF (status=released_fixed_parser, papers=929, last_success=2026-05-15 15:14:38)
+2026-05-15 15:40:42 | INFO | paper_crawler_agent | Checking source: IJCAI 2025 Proceedings
+2026-05-15 15:40:42 | INFO | paper_crawler_agent | ✓ Skip already-done source: IJCAI 2025 Proceedings (status=released_fixed_parser, papers=1279, last_success=2026-05-15 15:13:29)
+2026-05-15 15:40:43 | INFO | paper_crawler_agent | Checking source: NeurIPS 2025 Proceedings
+2026-05-15 15:40:43 | INFO | paper_crawler_agent | ✓ Skip already-done source: NeurIPS 2025 Proceedings (status=released_fixed_parser, papers=5823, last_success=2026-05-15 15:13:58)
+2026-05-15 15:40:43 | INFO | paper_crawler_agent | Checking source: KDD 2025 Research Track
+2026-05-15 15:40:43 | INFO | paper_crawler_agent | ✓ Skip already-done source: KDD 2025 Research Track (status=released_fixed_parser, papers=813, last_success=2026-05-15 15:27:19)
+2026-05-15 15:40:43 | INFO | paper_crawler_agent | Skip disabled source: ACM MM 2026 Regular Papers
+2026-05-15 15:40:43 | INFO | paper_crawler_agent | Skip disabled source: SIGGRAPH 2026 Technical Papers
+2026-05-15 15:40:43 | INFO | paper_crawler_agent | Run finished
+2026-05-15 15:41:16 | INFO | paper_crawler_agent | Loaded 15 sources
+2026-05-15 15:41:16 | INFO | paper_crawler_agent | Checking source: ECCV 2026 ECVA Papers
+2026-05-15 15:41:46 | INFO | paper_crawler_agent | ECCV 2026 ECVA Papers stable ok. papers=6166 inserted=6166 updated=0 skipped=0
+2026-05-15 15:41:46 | INFO | paper_crawler_agent | Checking source: CVPR 2026 CVF
+2026-05-15 15:41:47 | INFO | paper_crawler_agent | Checking source: ICCV 2026 CVF
+2026-05-15 15:41:48 | INFO | paper_crawler_agent | Checking source: WACV 2026 CVF
+2026-05-15 15:41:54 | INFO | paper_crawler_agent | WACV 2026 CVF stable ok. papers=831 inserted=831 updated=0 skipped=0
+2026-05-15 15:41:54 | INFO | paper_crawler_agent | Checking source: IJCAI 2026 Proceedings
+2026-05-15 15:41:55 | INFO | paper_crawler_agent | Checking source: NeurIPS 2026 Proceedings
+2026-05-15 15:41:56 | INFO | paper_crawler_agent | Checking source: ECCV 2024 ECVA Papers
+2026-05-15 15:42:21 | INFO | paper_crawler_agent | ECCV 2024 ECVA Papers stable ok. papers=6166 inserted=6166 updated=0 skipped=0
+2026-05-15 15:42:21 | INFO | paper_crawler_agent | Checking source: CVPR 2025 CVF
+2026-05-15 15:42:39 | INFO | paper_crawler_agent | CVPR 2025 CVF stable ok. papers=2871 inserted=2871 updated=0 skipped=0
+2026-05-15 15:42:39 | INFO | paper_crawler_agent | Checking source: ICCV 2025 CVF
+2026-05-15 15:42:57 | INFO | paper_crawler_agent | ICCV 2025 CVF stable ok. papers=2701 inserted=2701 updated=0 skipped=0
+2026-05-15 15:42:57 | INFO | paper_crawler_agent | Checking source: WACV 2025 CVF
+2026-05-15 15:43:04 | INFO | paper_crawler_agent | WACV 2025 CVF stable ok. papers=929 inserted=929 updated=0 skipped=0
+2026-05-15 15:43:04 | INFO | paper_crawler_agent | Checking source: IJCAI 2025 Proceedings
+2026-05-15 15:43:10 | INFO | paper_crawler_agent | IJCAI 2025 Proceedings stable ok. papers=1279 inserted=1279 updated=0 skipped=0
+2026-05-15 15:43:11 | INFO | paper_crawler_agent | Checking source: NeurIPS 2025 Proceedings
+2026-05-15 15:43:38 | INFO | paper_crawler_agent | NeurIPS 2025 Proceedings stable ok. papers=5823 inserted=5823 updated=0 skipped=0
+2026-05-15 15:43:38 | INFO | paper_crawler_agent | Checking source: KDD 2025 Research Track
+2026-05-15 15:43:40 | INFO | paper_crawler_agent | [Phase1] Searching release URL for KDD 2025 Research Track ...
+2026-05-15 15:43:40 | INFO | paper_crawler_agent | [Phase1] skip_url_search=true, using config URL directly: https://kdd2025.kdd.org/research-track-papers/
+2026-05-15 15:43:40 | INFO | paper_crawler_agent | [Phase1] Found URL: https://kdd2025.kdd.org/research-track-papers/ (confidence=1.00)
+2026-05-15 15:43:40 | INFO | paper_crawler_agent | [Phase2] Analyzing page structure for KDD 2025 Research Track ...
+2026-05-15 15:43:59 | INFO | paper_crawler_agent | [Phase2] Plan for KDD 2025 Research Track: has_titles=False, has_authors=False, has_pdf=False, needs_detail=False
+2026-05-15 15:44:02 | INFO | paper_crawler_agent | KDD 2025 Research Track fixed parser ok. papers=813 inserted=813 updated=0 skipped=0
+2026-05-15 15:44:02 | INFO | paper_crawler_agent | Skip disabled source: ACM MM 2026 Regular Papers
+2026-05-15 15:44:02 | INFO | paper_crawler_agent | Skip disabled source: SIGGRAPH 2026 Technical Papers
+2026-05-15 15:44:02 | INFO | paper_crawler_agent | Run finished
+2026-05-15 15:46:37 | INFO | paper_crawler_agent | Loaded 15 sources
+2026-05-15 15:46:37 | INFO | paper_crawler_agent | Checking source: ECCV 2026 ECVA Papers
+2026-05-15 15:47:03 | INFO | paper_crawler_agent | ECCV 2026 ECVA Papers stable ok. papers=6166 inserted=6166 updated=0 skipped=0
+2026-05-15 15:47:03 | INFO | paper_crawler_agent | Checking source: CVPR 2026 CVF
+2026-05-15 15:47:05 | INFO | paper_crawler_agent | Checking source: ICCV 2026 CVF
+2026-05-15 15:47:06 | INFO | paper_crawler_agent | Checking source: WACV 2026 CVF
+2026-05-15 15:47:12 | INFO | paper_crawler_agent | WACV 2026 CVF stable ok. papers=831 inserted=831 updated=0 skipped=0
+2026-05-15 15:47:12 | INFO | paper_crawler_agent | Checking source: IJCAI 2026 Proceedings
+2026-05-15 15:47:13 | INFO | paper_crawler_agent | Checking source: NeurIPS 2026 Proceedings
+2026-05-15 15:47:15 | INFO | paper_crawler_agent | Checking source: ECCV 2024 ECVA Papers
+2026-05-15 15:47:40 | INFO | paper_crawler_agent | ECCV 2024 ECVA Papers stable ok. papers=6166 inserted=6166 updated=0 skipped=0
+2026-05-15 15:47:40 | INFO | paper_crawler_agent | Checking source: CVPR 2025 CVF
+2026-05-15 15:47:55 | INFO | paper_crawler_agent | CVPR 2025 CVF stable ok. papers=2871 inserted=2871 updated=0 skipped=0
+2026-05-15 15:47:55 | INFO | paper_crawler_agent | Checking source: ICCV 2025 CVF
+2026-05-15 15:48:11 | INFO | paper_crawler_agent | ICCV 2025 CVF stable ok. papers=2701 inserted=2701 updated=0 skipped=0
+2026-05-15 15:48:11 | INFO | paper_crawler_agent | Checking source: WACV 2025 CVF
+2026-05-15 15:48:17 | INFO | paper_crawler_agent | WACV 2025 CVF stable ok. papers=929 inserted=929 updated=0 skipped=0
+2026-05-15 15:48:18 | INFO | paper_crawler_agent | Checking source: IJCAI 2025 Proceedings
+2026-05-15 15:48:23 | INFO | paper_crawler_agent | IJCAI 2025 Proceedings stable ok. papers=1279 inserted=1279 updated=0 skipped=0
+2026-05-15 15:48:24 | INFO | paper_crawler_agent | Checking source: NeurIPS 2025 Proceedings
+2026-05-15 15:48:51 | INFO | paper_crawler_agent | NeurIPS 2025 Proceedings stable ok. papers=5823 inserted=5823 updated=0 skipped=0
+2026-05-15 15:48:51 | INFO | paper_crawler_agent | Checking source: KDD 2025 Research Track
+2026-05-15 15:48:53 | INFO | paper_crawler_agent | [Phase1] Searching release URL for KDD 2025 Research Track ...
+2026-05-15 15:48:53 | INFO | paper_crawler_agent | [Phase1] skip_url_search=true, using config URL directly: https://kdd2025.kdd.org/research-track-papers/
+2026-05-15 15:48:53 | INFO | paper_crawler_agent | [Phase1] Found URL: https://kdd2025.kdd.org/research-track-papers/ (confidence=1.00)
+2026-05-15 15:48:53 | INFO | paper_crawler_agent | [Phase2] Analyzing page structure for KDD 2025 Research Track ...
+2026-05-15 15:49:01 | INFO | paper_crawler_agent | [Phase2] Plan for KDD 2025 Research Track: has_titles=False, has_authors=False, has_pdf=False, needs_detail=False
+2026-05-15 15:49:04 | INFO | paper_crawler_agent | KDD 2025 Research Track fixed parser ok. papers=813 inserted=813 updated=0 skipped=0
+2026-05-15 15:49:05 | INFO | paper_crawler_agent | Skip disabled source: ACM MM 2026 Regular Papers
+2026-05-15 15:49:05 | INFO | paper_crawler_agent | Skip disabled source: SIGGRAPH 2026 Technical Papers
+2026-05-15 15:49:05 | INFO | paper_crawler_agent | Run finished

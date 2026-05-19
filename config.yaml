@@ -18,10 +18,10 @@ llm:
   model: "kimi-k2.6"
   api_key_env: "MOONSHOT_API_KEY"
   base_url_env: "MOONSHOT_BASE_URL"
-  temperature: 0.0
+  temperature: 0.6
   max_tokens: 2200
   timeout: 60
-  max_html_chars: 14000
+  max_html_chars: 30000
 agent:
   # variable 来源：先让大模型判断是否放榜；如果放榜但固定 parser 失败，再让大模型生成临时解析规则
   llm_judge_release_for_variable: true
@@ -147,16 +147,16 @@ sources:
     enabled: true
 
 
-  - name: "KDD 2026 Research Track"
+  - name: "KDD 2025 Research Track"
     venue: "KDD"
-    year: 2026
-    url: "https://kdd2026.kdd.org/research-track-papers/"
+    year: 2025
+    url: "https://kdd2025.kdd.org/research-track-papers/"
     parser: "generic"
     structure_type: "variable"
     use_llm: true
-    enabled: false
-    # 大模型 web_search 搜索词（用于搜索放榜 URL）
-    search_query: "KDD 2026 accepted research papers list official site"
+    skip_url_search: true   # URL 已知有效，跳过 Phase1 联网搜索
+    enabled: true
+    search_query: "KDD 2025 accepted research papers list official site"
 
   - name: "ACM MM 2026 Regular Papers"
     venue: "ACM MM"

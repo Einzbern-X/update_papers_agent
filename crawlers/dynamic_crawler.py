@@ -71,7 +71,7 @@ def _validate_papers(papers) -> list[dict]:
         if not isinstance(p, dict):
             continue
         title = clean_text(str(p.get("title", "")))
-        if len(title) < 10:  # 太短的标题不算论文
+        if not title:  # 空标题不算论文
             continue
         result.append({
             "title": title,

@@ -76,8 +76,8 @@ def extract_papers(html: str, base_url: str) -> list[dict]:
 ## 注意
 - 根据 page_structure_notes 中描述的 HTML 结构来写 selector，要精确
 - 用 urllib.parse.urljoin(base_url, href) 补全相对 URL
-- 过滤掉非论文内容（导航、菜单、标题过短的元素）
-- 标题至少 10 个字符
+- 过滤掉非论文内容（导航、菜单等明显不是论文标题的元素）
+- 不要用标题长度判断是否是论文，依赖 CSS selector 的精确度
 - 如果列表页已经有 PDF 直链，直接提取；不需要 detail_url
 """
 

@@ -241,11 +241,23 @@ class PaperCrawlerAgent:
 
         # Phase 1: 搜索
         self.logger.info("[Phase1] Searching release URL for %s ...", name)
-        try:
-            search_result = search_release_url(self.llm_client_web, venue, year, search_query)
-        except Exception as e:
-            self.logger.warning("[Phase1] Search failed for %s: %s", name, e)
-            return None
+
+        # 如果 source 配置了 skip_url_search: true，跳过联网搜索，直接用配置中的 URL
+        if source.get("skip_url_search", False):
+            self.logger.info("[Phase1] skip_url_search=true, using config URL directly: %s", source.get("url"))
+            search_result = {
+                "found": True,
+                "url": source.get("url", ""),
+                "not_released_reason": "",
+                "confidence": 1.0,
+                "reason": "skip_url_search: using config url directly",
+            }
+        else:
+            try:
+                search_result = search_release_url(self.llm_client_web, venue, year, search_query)
+            except Exception as e:
+                self.logger.warning("[Phase1] Search failed for %s: %s", name, e)
+                return None
 
         if not search_result.get("found"):
             self.logger.info("[Phase1] %s not released yet: %s", name,
@@ -379,13 +391,17 @@ class PaperCrawlerAgent:
         crawl_plan = self._discover_page_crawl_plan(source, html)
 
         if crawl_plan is not None and not crawl_plan.get("found", True):
-            # 大模型确认未放榜
-            update_source_status(source, "not_released", self.db_path,
-                                 release_status="not_released", last_hash=h,
-                                 last_error=crawl_plan.get("not_released_reason", ""))
-            self.logger.info("%s: not released. reason: %s", name,
-                             crawl_plan.get("not_released_reason", ""))
-            return
+            # 大模型 Phase1 搜索未找到放榜页，但配置 URL 本身 fetch 已成功（status < 400）
+            # → 降级 fallback：跳过 Phase1 判断，直接用配置 URL 继续 Phase2 分析 + 脚本生成
+            self.logger.warning(
+                "%s: Phase1 returned not-found (reason: %s), but config URL returned %d. "
+                "Falling back to config URL for Phase2 analysis.",
+                name, crawl_plan.get("not_released_reason", ""), status_code
+            )
+            crawl_plan["found"] = True
+            crawl_plan["url"] = url
+            crawl_plan["_discovered_url"] = url
+            crawl_plan["_discovered_html"] = html
 
         # 如果 Phase 1 发现了新的 URL+HTML，使用它们
         if crawl_plan and crawl_plan.get("_discovered_url"):
