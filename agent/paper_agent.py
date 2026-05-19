@@ -22,7 +22,7 @@ from planner.script_generator import (
     get_generated_script,
     save_generated_script,
 )
-from utils.normalize import clean_text, abs_url
+from utils.normalize import clean_text, abs_url, normalize_pdf_url
 from utils.logger import get_logger
 from database.source_repo import is_source_done
 
@@ -74,7 +74,7 @@ class PaperCrawlerAgent:
             "year": int(source.get("year") or 0),
             "title": clean_text(paper.get("title", "")),
             "authors": clean_text(paper.get("authors", "")),
-            "pdf_url": clean_text(paper.get("pdf_url", "")),
+            "pdf_url": normalize_pdf_url(paper.get("pdf_url", "")),
             "source_url": clean_text(source.get("url", "")),
         }
 

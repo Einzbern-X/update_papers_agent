@@ -486,3 +486,11 @@ requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ap
 2026-05-15 15:49:05 | INFO | paper_crawler_agent | Skip disabled source: ACM MM 2026 Regular Papers
 2026-05-15 15:49:05 | INFO | paper_crawler_agent | Skip disabled source: SIGGRAPH 2026 Technical Papers
 2026-05-15 15:49:05 | INFO | paper_crawler_agent | Run finished
+2026-05-19 15:59:09 | INFO | paper_crawler_agent | Loaded 15 sources
+2026-05-19 15:59:09 | INFO | paper_crawler_agent | Checking source: ECCV 2026 ECVA Papers
+2026-05-19 15:59:49 | INFO | paper_crawler_agent | Loaded 15 sources
+2026-05-19 15:59:49 | INFO | paper_crawler_agent | Checking source: ECCV 2026 ECVA Papers
+2026-05-19 16:00:04 | INFO | paper_crawler_agent | ECCV 2026 ECVA Papers stable ok. papers=6166 inserted=3161 updated=0 skipped=3005
+2026-05-19 16:00:04 | INFO | paper_crawler_agent | Checking source: CVPR 2026 CVF
+2026-05-19 16:00:05 | INFO | paper_crawler_agent | Checking source: ICCV 2026 CVF
+2026-05-19 16:00:07 | INFO | paper_crawler_agent | Checking source: WACV 2026 CVF

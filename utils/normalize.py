@@ -24,3 +24,18 @@ def truncate(text: str, max_chars: int) -> str:
     if len(text) <= max_chars:
         return text
     return text[:max_chars]
+
+
+def normalize_pdf_url(url: str) -> str:
+    """
+    规范化 pdf_url：
+    - 将 https://doi.org/<suffix> 转换为 https://dl.acm.org/doi/epdf/<suffix>
+    - 其他 URL 原样返回
+    """
+    url = clean_text(url)
+    if not url:
+        return ""
+    m = re.match(r"https://doi\.org/(.+)", url)
+    if m:
+        return f"https://dl.acm.org/doi/epdf/{m.group(1)}"
+    return url
