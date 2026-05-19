@@ -7,7 +7,7 @@
 
 ## 输出字段
 
-SQLite 和 CSV 对外字段固定为：
+SQLite 和 CSV 对外字段固定为： 
 
 ```csv
 venue,year,title,authors,pdf_url,source_url

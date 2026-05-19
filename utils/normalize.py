@@ -29,13 +29,19 @@ def truncate(text: str, max_chars: int) -> str:
 def normalize_pdf_url(url: str) -> str:
     """
     规范化 pdf_url：
-    - 将 https://doi.org/<suffix> 转换为 https://dl.acm.org/doi/epdf/<suffix>
+    - https://doi.org/<suffix>            → https://dl.acm.org/doi/epdf/<suffix>
+    - https://dl.acm.org/doi/pdf/<suffix> → https://dl.acm.org/doi/epdf/<suffix>
     - 其他 URL 原样返回
     """
     url = clean_text(url)
     if not url:
         return ""
+    # doi.org 直链 → epdf
     m = re.match(r"https://doi\.org/(.+)", url)
+    if m:
+        return f"https://dl.acm.org/doi/epdf/{m.group(1)}"
+    # dl.acm.org/doi/pdf/ → epdf
+    m = re.match(r"https://dl\.acm\.org/doi/pdf/(.+)", url)
     if m:
         return f"https://dl.acm.org/doi/epdf/{m.group(1)}"
     return url

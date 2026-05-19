@@ -19,7 +19,7 @@ llm:
   api_key_env: "MOONSHOT_API_KEY"
   base_url_env: "MOONSHOT_BASE_URL"
   temperature: 0.6
-  max_tokens: 2200
+  max_tokens: 4096
   timeout: 60
   max_html_chars: 30000
 agent:
@@ -34,9 +34,20 @@ agent:
   min_title_ratio: 0.90
   # 已成功爬取过的 source 不再重复爬（true=跳过，false=每次都重跑）
   skip_done_sources: true
+  # 脚本执行结果有问题时，最多让大模型自动修复几轮（Reflection 循环）
+  max_reflection_rounds: 2
 
 sources:
-
+  - name: "KDD 2024 Research Track"
+    venue: "KDD"
+    year: 2024
+    url: "https://kdd2024.kdd.org/research-track-papers/"
+    parser: "generic"
+    structure_type: "variable"
+    use_llm: true
+    skip_url_search: true   # URL 已知有效，跳过 Phase1 联网搜索
+    enabled: true
+    search_query: "KDD 2024 accepted research papers list official site"
   # 2026
   - name: "ECCV 2026 ECVA Papers"
     venue: "ECCV"

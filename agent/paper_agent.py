@@ -19,8 +19,10 @@ from planner.extraction_planner import generate_extraction_rule, get_generated_r
 from planner.url_searcher import search_release_url, analyze_page_structure, build_page_crawl_plan
 from planner.script_generator import (
     generate_crawl_script,
+    fix_crawl_script,
     get_generated_script,
     save_generated_script,
+    extract_html_structure_sample,
 )
 from utils.normalize import clean_text, abs_url, normalize_pdf_url
 from utils.logger import get_logger
@@ -186,10 +188,14 @@ class PaperCrawlerAgent:
 
     def _generate_script_and_parse(self, source: dict, html: str, page_info: dict,
                                     crawl_plan: dict | None = None):
-        """生成定制爬取脚本并执行。crawl_plan 由 Phase 2 分析提供，可为 None。"""
+        """生成定制爬取脚本并执行，失败时自动 Reflection 修复，最多重试 2 次。"""
         if not self.llm_client.available():
             return [], False, "llm_not_available", ""
+
         max_html_chars = int(self.llm_cfg.get("max_html_chars", 14000))
+        max_reflection_rounds = int(self.config.get("agent", {}).get("max_reflection_rounds", 2))
+
+        # ── 第一轮：生成初始脚本 ──
         script_info = generate_crawl_script(
             self.llm_client, page_info, html,
             max_html_chars=max_html_chars,
@@ -197,9 +203,37 @@ class PaperCrawlerAgent:
         )
         if not script_info.get("generated") or not script_info.get("script"):
             return [], False, f"llm_no_script:{script_info.get('reason', '')}", ""
-        papers = crawl_by_script(source, html, script_info)
 
-        # 如果脚本提取出 detail_url，自动补全 pdf_url
+        papers = crawl_by_script(source, html, script_info)
+        valid, reason = validate_papers(papers, self.min_valid_paper_count, self.min_title_ratio)
+        self.logger.info("Script round 0: papers=%d valid=%s reason=%s", len(papers), valid, reason)
+
+        # ── Reflection 循环：发现问题 → 反馈给模型修复 → 重新执行 ──
+        for round_idx in range(1, max_reflection_rounds + 1):
+            if valid:
+                break  # 已经合格，不需要继续修
+
+            self.logger.info("Reflection round %d: attempting to fix script...", round_idx)
+            fixed_info = fix_crawl_script(
+                self.llm_client,
+                original_script=script_info["script"],
+                papers=papers,
+                html=html,
+                max_html_chars=max_html_chars,
+            )
+
+            if not fixed_info.get("generated") or not fixed_info.get("script"):
+                self.logger.info("Reflection round %d: no fix generated (%s)", round_idx,
+                                 fixed_info.get("reason", ""))
+                break  # 模型认为无问题可修，停止
+
+            script_info = fixed_info
+            papers = crawl_by_script(source, html, script_info)
+            valid, reason = validate_papers(papers, self.min_valid_paper_count, self.min_title_ratio)
+            self.logger.info("Reflection round %d: papers=%d valid=%s reason=%s",
+                             round_idx, len(papers), valid, reason)
+
+        # ── 补全 detail_url → pdf_url ──
         needs_detail = crawl_plan.get("needs_detail_page", False) if crawl_plan else False
         has_detail_urls = any(p.get("detail_url") for p in papers)
         if (needs_detail or has_detail_urls) and papers:
@@ -299,7 +333,7 @@ class PaperCrawlerAgent:
 
         # Phase 2: 分析页面结构
         max_html_chars = int(self.llm_cfg.get("max_html_chars", 14000))
-        html_sample = current_html[:max_html_chars]
+        html_sample = extract_html_structure_sample(current_html, max_chars=max_html_chars)
         self.logger.info("[Phase2] Analyzing page structure for %s ...", name)
         try:
             analysis = analyze_page_structure(

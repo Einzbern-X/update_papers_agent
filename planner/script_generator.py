@@ -42,6 +42,86 @@ def extract_html_structure_sample(html: str, max_chars: int = 14000) -> str:
         # 降级：直接截断原始 HTML
         return html[:max_chars]
 
+
+def pre_analyze_html(html: str) -> dict:
+    """
+    用程序主动探索 HTML 结构，生成一份结构分析报告。
+    这模拟了人类工程师 "先跑代码看结构" 的思维过程。
+
+    返回的报告会附在 prompt 里，让大模型不需要自己猜结构，
+    而是直接基于已经探索好的结论来写脚本。
+    """
+    try:
+        soup = BeautifulSoup(html, "lxml")
+        for tag in soup(["script", "style", "noscript", "iframe"]):
+            tag.decompose()
+
+        report = {}
+
+        # 1. 统计各容器类型数量
+        tag_counts = {}
+        for tag in ["table", "ul", "ol", "dl", "div", "section", "article"]:
+            count = len(soup.find_all(tag))
+            if count > 0:
+                tag_counts[tag] = count
+        report["container_counts"] = tag_counts
+
+        # 2. 分析最可能的论文容器（取数量最多的几种）
+        # 对 table 做深入分析
+        tables = soup.find_all("table")
+        if tables:
+            table_analysis = []
+            for i, t in enumerate(tables[:3]):
+                rows = t.find_all("tr")
+                # 取前2行展示结构
+                row_samples = []
+                for row in rows[:4]:
+                    tds = row.find_all("td")
+                    td_info = []
+                    for td in tds:
+                        children_tags = [c.name for c in td.children if hasattr(c, "name") and c.name]
+                        text_preview = " ".join(td.get_text(" ").split())[:120]
+                        td_info.append({
+                            "children_tags": children_tags,
+                            "text_preview": text_preview,
+                        })
+                    row_samples.append(td_info)
+                table_analysis.append({
+                    "table_index": i,
+                    "total_rows": len(rows),
+                    "row_samples": row_samples,
+                })
+            report["table_analysis"] = table_analysis
+
+        # 3. 检查是否有 <strong>/<h2>/<h3> 包含论文标题的迹象
+        strong_tags = soup.find_all("strong")
+        report["strong_count"] = len(strong_tags)
+        report["strong_samples"] = [
+            " ".join(s.get_text(" ").split())[:100]
+            for s in strong_tags[:5]
+        ]
+
+        # 4. 检查 DOI / PDF 链接
+        doi_links = [a["href"] for a in soup.find_all("a", href=True)
+                     if "doi.org" in a.get("href", "")]
+        pdf_links = [a["href"] for a in soup.find_all("a", href=True)
+                     if a.get("href", "").lower().endswith(".pdf")]
+        report["doi_link_count"] = len(doi_links)
+        report["doi_link_samples"] = doi_links[:3]
+        report["pdf_link_count"] = len(pdf_links)
+        report["pdf_link_samples"] = pdf_links[:3]
+
+        # 5. 检查 DOI 文本（有时 DOI 不是 <a> 而是纯文本）
+        import re
+        doi_texts = re.findall(r"https://doi\.org/\S+", soup.get_text())
+        report["doi_text_count"] = len(doi_texts)
+        report["doi_text_samples"] = doi_texts[:3]
+
+        return report
+
+    except Exception as e:
+        return {"error": str(e)}
+
 SCRIPT_SYSTEM_PROMPT = """
 你是论文列表页面爬取脚本生成 Agent。
 
@@ -55,11 +135,13 @@ SCRIPT_SYSTEM_PROMPT = """
 
 ## 分析步骤（必须执行）
 
-1. 找出页面中**重复出现的论文容器**（table/div/li/dt 等）
-2. 确认每篇论文的**标题、作者、PDF/DOI 分别在哪个子元素里**
-   - 注意：标题和 DOI/PDF 可能在**同一个 td/div** 里，要分别提取，不能把整块文本都当标题
-   - 若标题在 `<strong>` 里，就只取 `<strong>` 的文本，不要取父元素全部文本
-3. 识别 DOI URL 的格式（如 `https://doi.org/...`），用正则单独提取，放入 pdf_url 字段
+**第一步：先阅读 `pre_analysis_report` 字段**（这是程序自动运行结构探索代码得出的报告）
+- `table_analysis`：每个 table 的行数和前几行的内容预览，直接告诉你论文在哪里
+- `strong_samples`：`<strong>` 标签内容，通常就是论文标题
+- `doi_text_count` / `doi_text_samples`：DOI 出现在纯文本里（不是链接），要用正则提取
+- `pdf_link_count`：PDF 直链数量
+
+**第二步：基于报告结论，对照 html_sample 验证**，确认 selector 路径
 
 ## 函数签名（必须严格遵守）
 
@@ -145,6 +227,8 @@ def generate_crawl_script(llm_client, page_info: dict, html: str,
         "links": page_info.get("links", [])[:60],
         "text_blocks": page_info.get("text_blocks", [])[:40],
         "body_sample": page_info.get("body_sample", ""),
+        # 程序自动探索的结构报告（相当于工程师先跑代码看结构的结论）
+        "pre_analysis_report": pre_analyze_html(html),
         # 去噪后的结构化 HTML，大模型能看到清晰的论文容器结构
         "html_sample": extract_html_structure_sample(html, max_chars=max_html_chars),
     }
@@ -215,3 +299,146 @@ def save_generated_script(source: dict, script_info: dict, path: str) -> str:
     data[key] = script_info
     p.write_text(yaml.safe_dump(data, allow_unicode=True, sort_keys=False), encoding="utf-8")
     return key
+
+
+# ──────────────────────────────────────────────
+# Reflection：基于执行错误修复脚本
+# ──────────────────────────────────────────────
+
+_FIX_SYSTEM_PROMPT = """
+你是论文爬取脚本的自动修复 Agent。
+
+上一版脚本执行后出现了问题，你需要分析错误并输出修复后的完整脚本。
+
+你会收到：
+- 原始脚本代码
+- 执行后提取到的样本论文（前5条）
+- 发现的具体问题列表
+- 页面 HTML 片段（去噪后）
+
+## 常见问题及修复策略
+
+1. **标题混入了 DOI/URL 文本**
+   - 原因：用了父元素 get_text()，把标题和 DOI 一起抓了
+   - 修复：只取 `<strong>` 或标题专属子标签的文本；DOI 用正则单独提取
+
+2. **作者字段为空**
+   - 原因：作者在相邻 <tr>/<dd> 里，selector 没找到
+   - 修复：检查 HTML 中作者所在的相对位置，用 next_sibling 或 find_next 定位
+
+3. **提取数量为 0 或极少**
+   - 原因：selector 写错，或页面结构与假设不符
+   - 修复：重新分析 HTML，找到真正重复的论文容器
+
+4. **标题包含多余空白或换行**
+   - 修复：对 title 做 `' '.join(title.split())`
+
+## 输出格式（必须是 JSON）
+
+{
+  "generated": true,
+  "script": "修复后的完整 Python 函数代码",
+  "confidence": 0.0到1.0,
+  "reason": "说明修复了什么问题，使用了什么新策略"
+}
+
+## 约束（同生成时）
+- 只能 import: re, bs4（BeautifulSoup）, urllib.parse
+- 不能做网络请求
+- 必须定义 `def extract_papers(html: str, base_url: str) -> list[dict]:`
+"""
+
+
+def _diagnose_papers(papers: list[dict]) -> list[str]:
+    """
+    检查提取结果，返回发现的问题列表。
+    问题描述会作为 Reflection 的输入反馈给大模型。
+    """
+    issues = []
+    if not papers:
+        issues.append("提取结果为空，完全没有论文")
+        return issues
+
+    # 检查标题混入 URL
+    doi_in_title = sum(1 for p in papers if "doi.org" in p.get("title", "").lower()
+                       or "http" in p.get("title", "").lower())
+    if doi_in_title > 0:
+        issues.append(
+            f"{doi_in_title}/{len(papers)} 篇论文的 title 字段混入了 DOI URL 或 http 链接，"
+            "应只取标题文本，DOI 放入 pdf_url 字段"
+        )
+
+    # 检查作者为空
+    empty_authors = sum(1 for p in papers if not p.get("authors", "").strip())
+    if empty_authors > len(papers) * 0.5:
+        issues.append(
+            f"{empty_authors}/{len(papers)} 篇论文的 authors 字段为空，"
+            "请检查作者在 HTML 中的位置并重新提取"
+        )
+
+    # 检查标题过短或明显不是论文标题
+    bad_titles = [p["title"] for p in papers
+                  if len(p.get("title", "")) < 5 or p.get("title", "").startswith("http")]
+    if bad_titles:
+        issues.append(f"发现 {len(bad_titles)} 个可疑标题（过短或以http开头）：{bad_titles[:3]}")
+
+    return issues
+
+
+def fix_crawl_script(llm_client, original_script: str, papers: list[dict],
+                     html: str, max_html_chars: int = 14000) -> dict:
+    """
+    Reflection：把执行结果的问题反馈给大模型，让它修复脚本。
+
+    Args:
+        llm_client: LLMClient 实例
+        original_script: 上一轮生成的脚本代码
+        papers: 上一轮执行得到的论文列表（用于诊断问题）
+        html: 页面原始 HTML
+        max_html_chars: HTML 截断长度
+
+    Returns:
+        dict: 同 generate_crawl_script 的返回格式
+    """
+    issues = _diagnose_papers(papers)
+    if not issues:
+        # 没有发现问题，不需要修复
+        return {"generated": False, "script": "", "confidence": 0.0, "reason": "no_issues_found"}
+
+    sample_papers = papers[:5]
+
+    payload = {
+        "original_script": original_script,
+        "issues_found": issues,
+        "sample_papers_extracted": sample_papers,
+        "html_sample": extract_html_structure_sample(html, max_chars=max_html_chars),
+    }
+
+    logger.info("Reflection: found %d issues, asking LLM to fix script", len(issues))
+    for issue in issues:
+        logger.info("  - %s", issue)
+
+    result = llm_client.chat_json(
+        _FIX_SYSTEM_PROMPT,
+        json.dumps(payload, ensure_ascii=False, indent=2)
+    )
+
+    generated = bool(result.get("generated", False))
+    script = str(result.get("script", "")).strip()
+    confidence = float(result.get("confidence", 0.0))
+    reason = str(result.get("reason", ""))
+
+    if generated and "def extract_papers" not in script:
+        return {
+            "generated": False,
+            "script": "",
+            "confidence": 0.0,
+            "reason": f"fix_missing_extract_papers: {reason}",
+        }
+
+    return {
+        "generated": generated,
+        "script": script,
+        "confidence": confidence,
+        "reason": f"[reflection_fix] {reason}",
+    }
