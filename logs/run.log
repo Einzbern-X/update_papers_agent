@@ -550,3 +550,42 @@ requests.exceptions.HTTPError: 400 Client Error: Bad Request for url: https://ap
 2026-05-19 17:26:00 | INFO | paper_crawler_agent | Skip disabled source: ACM MM 2026 Regular Papers
 2026-05-19 17:26:00 | INFO | paper_crawler_agent | Skip disabled source: SIGGRAPH 2026 Technical Papers
 2026-05-19 17:26:00 | INFO | paper_crawler_agent | Run finished
+2026-05-19 17:43:51 | INFO | paper_crawler_agent | Loaded 15 sources
+2026-05-19 17:43:51 | INFO | paper_crawler_agent | Checking source: ECCV 2026 ECVA Papers
+2026-05-19 17:43:57 | INFO | paper_crawler_agent | ECCV 2026 ECVA Papers stable parser invalid: no_papers
+2026-05-19 17:43:57 | INFO | paper_crawler_agent | Checking source: CVPR 2026 CVF
+2026-05-19 17:44:18 | INFO | paper_crawler_agent | Checking source: ICCV 2026 CVF
+2026-05-19 17:44:38 | INFO | paper_crawler_agent | Checking source: WACV 2026 CVF
+2026-05-19 17:44:57 | INFO | paper_crawler_agent | WACV 2026 CVF stable ok. papers=831 inserted=831 updated=0 skipped=0
+2026-05-19 17:44:58 | INFO | paper_crawler_agent | Checking source: IJCAI 2026 Proceedings
+2026-05-19 17:44:59 | INFO | paper_crawler_agent | Checking source: NeurIPS 2026 Proceedings
+2026-05-19 17:45:00 | INFO | paper_crawler_agent | Checking source: ECCV 2024 ECVA Papers
+2026-05-19 17:45:13 | INFO | paper_crawler_agent | ECCV 2024 ECVA Papers stable ok. papers=2387 inserted=2387 updated=0 skipped=0
+2026-05-19 17:45:14 | INFO | paper_crawler_agent | Checking source: CVPR 2025 CVF
+2026-05-19 17:47:25 | INFO | paper_crawler_agent | Loaded 15 sources
+2026-05-19 17:47:25 | INFO | paper_crawler_agent | Checking source: ECCV 2026 ECVA Papers
+2026-05-19 17:47:29 | INFO | paper_crawler_agent | ECCV 2026 ECVA Papers stable parser invalid: no_papers
+2026-05-19 17:47:30 | INFO | paper_crawler_agent | Checking source: CVPR 2026 CVF
+2026-05-19 17:47:35 | INFO | paper_crawler_agent | Checking source: ICCV 2026 CVF
+2026-05-19 17:47:42 | INFO | paper_crawler_agent | Checking source: WACV 2026 CVF
+2026-05-19 17:47:52 | INFO | paper_crawler_agent | WACV 2026 CVF stable ok. papers=831 inserted=831 updated=0 skipped=0
+2026-05-19 17:47:53 | INFO | paper_crawler_agent | Checking source: IJCAI 2026 Proceedings
+2026-05-19 17:47:54 | INFO | paper_crawler_agent | Checking source: NeurIPS 2026 Proceedings
+2026-05-19 17:47:55 | INFO | paper_crawler_agent | Checking source: ECCV 2024 ECVA Papers
+2026-05-19 17:48:15 | INFO | paper_crawler_agent | ECCV 2024 ECVA Papers stable ok. papers=2387 inserted=2387 updated=0 skipped=0
+2026-05-19 17:48:15 | INFO | paper_crawler_agent | Checking source: CVPR 2025 CVF
+2026-05-19 17:48:34 | INFO | paper_crawler_agent | CVPR 2025 CVF stable ok. papers=2871 inserted=2871 updated=0 skipped=0
+2026-05-19 17:48:34 | INFO | paper_crawler_agent | Checking source: ICCV 2025 CVF
+2026-05-19 17:48:53 | INFO | paper_crawler_agent | ICCV 2025 CVF stable ok. papers=2701 inserted=2701 updated=0 skipped=0
+2026-05-19 17:48:53 | INFO | paper_crawler_agent | Checking source: WACV 2025 CVF
+2026-05-19 17:49:06 | INFO | paper_crawler_agent | WACV 2025 CVF stable ok. papers=929 inserted=929 updated=0 skipped=0
+2026-05-19 17:49:07 | INFO | paper_crawler_agent | Checking source: IJCAI 2025 Proceedings
+2026-05-19 17:49:14 | INFO | paper_crawler_agent | IJCAI 2025 Proceedings stable ok. papers=1279 inserted=1279 updated=0 skipped=0
+2026-05-19 17:49:14 | INFO | paper_crawler_agent | Checking source: NeurIPS 2025 Proceedings
+2026-05-19 17:49:48 | INFO | paper_crawler_agent | NeurIPS 2025 Proceedings stable ok. papers=5823 inserted=5823 updated=0 skipped=0
+2026-05-19 17:49:48 | INFO | paper_crawler_agent | Checking source: KDD 2025 Research Track
+2026-05-19 17:49:51 | INFO | paper_crawler_agent | LLMClientWeb not available, skip discovery for: KDD 2025 Research Track
+2026-05-19 17:49:51 | INFO | paper_crawler_agent | KDD 2025 Research Track release status unknown: {'status': 'unknown', 'reason': 'llm_not_available', 'confidence': 0.0}
+2026-05-19 17:49:51 | INFO | paper_crawler_agent | Skip disabled source: ACM MM 2026 Regular Papers
+2026-05-19 17:49:51 | INFO | paper_crawler_agent | Skip disabled source: SIGGRAPH 2026 Technical Papers
+2026-05-19 17:49:51 | INFO | paper_crawler_agent | Run finished
