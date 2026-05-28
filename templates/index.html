@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paper Crawler - Conference Papers Download</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+        
+        .conferences-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .conference-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .conference-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        
+        .conference-card h3 {
+            color: #333;
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .conference-card .venue-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .conference-card .year {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .conference-card .status {
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .status-released {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-not-released {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-not-crawled {
+            background: #e2e3e5;
+            color: #383d41;
+        }
+        
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+        }
+        
+        .btn-success:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 16px 24px;
+            border-radius: 12px;
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .toast-success {
+            background: #28a745;
+        }
+        
+        .toast-error {
+            background: #dc3545;
+        }
+        
+        .toast-info {
+            background: #17a2b8;
+        }
+        
+        .info-section {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 30px;
+            color: white;
+        }
+        
+        .info-section h2 {
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+        }
+        
+        .info-section p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 论文下载中心</h1>
+            <p>点击会议按钮获取论文列表，支持 CSV 格式下载</p>
+        </div>
+        
+        <div class="conferences-grid" id="conferencesGrid">
+            {% for conf in conferences %}
+            <div class="conference-card" data-name="{{ conf.name }}">
+                <h3>
+                    <span class="venue-badge">{{ conf.venue }}</span>
+                </h3>
+                <p class="year">{{ conf.year }} {{ conf.venue }} Papers</p>
+                <div class="status status-not-crawled" id="status-{{ loop.index }}">等待爬取</div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="crawlConference('{{ conf.name }}', {{ loop.index }})" id="btn-crawl-{{ loop.index }}">
+                        爬取论文
+                    </button>
+                    <button class="btn btn-success" onclick="downloadCSV('{{ conf.name }}')" id="btn-download-{{ loop.index }}" disabled>
+                        下载 CSV
+                    </button>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <div class="info-section">
+            <h2>💡 使用说明</h2>
+            <p>
+                1. 点击「爬取论文」按钮，系统会自动从官网获取论文列表<br>
+                2. 爬取完成后，「下载 CSV」按钮将变为可用状态<br>
+                3. 点击下载 CSV」即可下载论文信息（标题、作者、PDF链接等）<br>
+                4. 如果会议尚未放榜，状态将显示为「尚未放榜」
+            </p>
+        </div>
+    </div>
+    
+    <div class="toast" id="toast"></div>
+
+    <script>
+        const taskStatusMap = {};
+        
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            refreshStatus();
+        });
+        
+        async function refreshStatus() {
+            try {
+                const response = await fetch('/api/conferences');
+                const conferences = await response.json();
+                
+                conferences.forEach((conf, index) => {
+                    const idx = index + 1;
+                    const statusEl = document.getElementById(`status-${idx}`);
+                    const btnCrawl = document.getElementById(`btn-crawl-${idx}`);
+                    const btnDownload = document.getElementById(`btn-download-${idx}`);
+                    
+                    if (!statusEl || !btnCrawl || !btnDownload) return;
+                    
+                    let statusText = '';
+                    let statusClass = '';
+                    
+                    if (conf.status.startsWith('released')) {
+                        statusText = `已爬取 ${conf.paper_count} 篇论文`;
+                        statusClass = 'status-released';
+                        btnDownload.disabled = false;
+                        btnCrawl.textContent = '重新爬取';
+                    } else if (conf.status === 'not_crawled') {
+                        statusText = '等待爬取';
+                        statusClass = 'status-not-crawled';
+                    } else {
+                        // 其他所有状态统一视为「尚未放榜」
+                        statusText = '尚未放榜';
+                        statusClass = 'status-not-released';
+                    }
+                    
+                    statusEl.className = `status ${statusClass}`;
+                    statusEl.textContent = statusText;
+                });
+            } catch (error) {
+                console.error('Failed to refresh status:', error);
+            }
+        }
+        
+        async function crawlConference(name, index) {
+            const btnCrawl = document.getElementById(`btn-crawl-${index}`);
+            const statusEl = document.getElementById(`status-${index}`);
+            
+            btnCrawl.disabled = true;
+            btnCrawl.innerHTML = '<span class="loading"></span>爬取中...';
+            statusEl.className = 'status status-not-crawled';
+            statusEl.textContent = '正在爬取...';
+            
+            showToast('开始爬取论文，请稍候...', 'info');
+            
+            try {
+                const response = await fetch(`/api/crawl/${encodeURIComponent(name)}`);
+                const result = await response.json();
+                
+                if (result.error) {
+                    showToast(result.error, 'error');
+                    btnCrawl.disabled = false;
+                    btnCrawl.textContent = '爬取论文';
+                    return;
+                }
+                
+                const taskId = result.task_id;
+                taskStatusMap[index] = taskId;
+                
+                // Poll for status
+                pollTaskStatus(index, name);
+                
+            } catch (error) {
+                showToast('爬取失败: ' + error.message, 'error');
+                btnCrawl.disabled = false;
+                btnCrawl.textContent = '爬取论文';
+            }
+        }
+        
+        async function pollTaskStatus(index, name) {
+            const taskId = taskStatusMap[index];
+            if (!taskId) return;
+            
+            const btnCrawl = document.getElementById(`btn-crawl-${index}`);
+            const btnDownload = document.getElementById(`btn-download-${index}`);
+            const statusEl = document.getElementById(`status-${index}`);
+            
+            try {
+                const response = await fetch(`/api/status/${taskId}`);
+                const task = await response.json();
+                
+                if (task.status === 'running') {
+                    statusEl.textContent = task.message;
+                    setTimeout(() => pollTaskStatus(index, name), 2000);
+                } else if (task.status === 'success') {
+                    showToast(`爬取成功！共 ${task.paper_count} 篇论文`, 'success');
+                    btnCrawl.disabled = false;
+                    btnCrawl.textContent = '重新爬取';
+                    btnDownload.disabled = false;
+                    refreshStatus();
+                } else if (task.status === 'not_released') {
+                    showToast('该会议尚未放榜', 'info');
+                    btnCrawl.disabled = false;
+                    btnCrawl.textContent = '爬取论文';
+                    statusEl.className = 'status status-not-released';
+                    statusEl.textContent = '尚未放榜';
+                } else {
+                    showToast(task.message || '爬取失败', 'error');
+                    btnCrawl.disabled = false;
+                    btnCrawl.textContent = '爬取论文';
+                    statusEl.className = 'status status-error';
+                    statusEl.textContent = task.message;
+                }
+            } catch (error) {
+                showToast('检查状态失败', 'error');
+                btnCrawl.disabled = false;
+                btnCrawl.textContent = '爬取论文';
+            }
+        }
+        
+        async function downloadCSV(name) {
+            try {
+                const response = await fetch(`/api/download/${encodeURIComponent(name)}`);
+                
+                if (!response.ok) {
+                    const error = await response.json();
+                    showToast(error.error || '下载失败', 'error');
+                    return;
+                }
+                
+                // Trigger download
+                const blob = await response.blob();
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${name}_papers.csv`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
+                
+                showToast('下载成功！', 'success');
+                
+            } catch (error) {
+                showToast('下载失败: ' + error.message, 'error');
+            }
+        }
+        
+        function showToast(message, type) {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast toast-${type} show`;
+            
+            setTimeout(() => {
+                toast.className = toast.className.replace('show', '');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

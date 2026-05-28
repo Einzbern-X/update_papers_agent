@@ -1,179 +1,152 @@
-# 论文放榜监测 Agent 配置
-# 保存字段：venue, year, title, authors, pdf_url, source_url
-
-request:
-  timeout: 30
-  sleep_seconds: 0.2
-  user_agent: "Mozilla/5.0 PaperCrawlerAgent/1.0"
-
-database:
-  path: "data/papers.db"
-
-export:
-  path: "exports/all_papers.csv"
-
-llm:
-  enabled: true
-  provider: "openai_compatible"
-  model: "kimi-k2.6"
-  api_key_env: "MOONSHOT_API_KEY"
-  base_url_env: "MOONSHOT_BASE_URL"
-  temperature: 0.6
-  max_tokens: 2200
-  timeout: 60
-  max_html_chars: 30000
 agent:
-  # variable 来源：先让大模型判断是否放榜；如果放榜但固定 parser 失败，再让大模型生成临时解析规则
-  llm_judge_release_for_variable: true
   auto_generate_rules: true
-  save_generated_rules: true
-  generated_rules_path: "runtime_rules/generated_rules.yaml"
-  # 大模型生成定制爬取脚本的持久化路径（新策略）
-  generated_scripts_path: "runtime_rules/generated_scripts.yaml"
+  generated_rules_path: runtime_rules/generated_rules.yaml
+  generated_scripts_path: runtime_rules/generated_scripts.yaml
+  llm_judge_release_for_variable: true
+  min_title_ratio: 0.9
   min_valid_paper_count: 5
-  min_title_ratio: 0.90
-  # 已成功爬取过的 source 不再重复爬（true=跳过，false=每次都重跑）
+  save_generated_rules: true
   skip_done_sources: true
-
+database:
+  path: data/papers.db
+export:
+  path: exports/all_papers.csv
+llm:
+  api_key_env: MOONSHOT_API_KEY
+  base_url_env: MOONSHOT_BASE_URL
+  enabled: true
+  max_html_chars: 30000
+  max_tokens: 2200
+  model: kimi-k2.6
+  provider: openai_compatible
+  temperature: 0.6
+  timeout: 60
+request:
+  sleep_seconds: 0.2
+  timeout: 30
+  user_agent: Mozilla/5.0 PaperCrawlerAgent/1.0
 sources:
-
-  # 2026
-  - name: "ECCV 2026 ECVA Papers"
-    venue: "ECCV"
-    year: 2026
-    url: "https://www.ecva.net/papers.php"
-    parser: "ecva"
-    structure_type: "stable"
-    use_llm: false
-    enabled: true
-
-  - name: "CVPR 2026 CVF"
-    venue: "CVPR"
-    year: 2026
-    url: "https://openaccess.thecvf.com/CVPR2026?day=all"
-    parser: "cvf"
-    structure_type: "stable"
-    use_llm: false
-    enabled: true
-
-  - name: "ICCV 2026 CVF"
-    venue: "ICCV"
-    year: 2026
-    url: "https://openaccess.thecvf.com/ICCV2026?day=all"
-    parser: "cvf"
-    structure_type: "stable"
-    use_llm: false
-    enabled: true
-
-  - name: "WACV 2026 CVF"
-    venue: "WACV"
-    year: 2026
-    url: "https://openaccess.thecvf.com/WACV2026?day=all"
-    parser: "cvf"
-    structure_type: "stable"
-    use_llm: false
-    enabled: true
-
-  - name: "IJCAI 2026 Proceedings"
-    venue: "IJCAI"
-    year: 2026
-    url: "https://www.ijcai.org/proceedings/2026/"
-    parser: "ijcai"
-    structure_type: "stable"
-    use_llm: false
-    enabled: true
-
-  - name: "NeurIPS 2026 Proceedings"
-    venue: "NeurIPS"
-    year: 2026
-    url: "https://papers.nips.cc/paper_files/paper/2026"
-    parser: "neurips"
-    structure_type: "stable"
-    use_llm: false
-    enabled: true
-  # 2025
-  - name: "ECCV 2024 ECVA Papers"
-    venue: "ECCV"
-    year: 2024
-    url: "https://www.ecva.net/papers.php"
-    parser: "ecva"
-    structure_type: "stable"
-    use_llm: false
-    enabled: true
-
-  - name: "CVPR 2025 CVF"
-    venue: "CVPR"
-    year: 2025
-    url: "https://openaccess.thecvf.com/CVPR2025?day=all"
-    parser: "cvf"
-    structure_type: "stable"
-    use_llm: false
-    enabled: true
-
-  - name: "ICCV 2025 CVF"
-    venue: "ICCV"
-    year: 2025
-    url: "https://openaccess.thecvf.com/ICCV2025?day=all"
-    parser: "cvf"
-    structure_type: "stable"
-    use_llm: false
-    enabled: true
-
-  - name: "WACV 2025 CVF"
-    venue: "WACV"
-    year: 2025
-    url: "https://openaccess.thecvf.com/WACV2025?day=all"
-    parser: "cvf"
-    structure_type: "stable"
-    use_llm: false
-    enabled: true
-
-  - name: "IJCAI 2025 Proceedings"
-    venue: "IJCAI"
-    year: 2025
-    url: "https://www.ijcai.org/proceedings/2025/"
-    parser: "ijcai"
-    structure_type: "stable"
-    use_llm: false
-    enabled: true
-
-  - name: "NeurIPS 2025 Proceedings"
-    venue: "NeurIPS"
-    year: 2025
-    url: "https://papers.nips.cc/paper_files/paper/2025"
-    parser: "neurips"
-    structure_type: "stable"
-    use_llm: false
-    enabled: true
-
-
-  - name: "KDD 2025 Research Track"
-    venue: "KDD"
-    year: 2025
-    url: "https://kdd2025.kdd.org/research-track-papers/"
-    parser: "generic"
-    structure_type: "variable"
-    use_llm: true
-    skip_url_search: true   # URL 已知有效，跳过 Phase1 联网搜索
-    enabled: true
-    search_query: "KDD 2025 accepted research papers list official site"
-
-  - name: "ACM MM 2026 Regular Papers"
-    venue: "ACM MM"
-    year: 2026
-    url: "https://2026.acmmm.org/accepted-regular-papers/"
-    parser: "generic"
-    structure_type: "variable"
-    use_llm: true
-    enabled: false
-    search_query: "ACM Multimedia MM 2026 accepted regular papers official"
-
-  - name: "SIGGRAPH 2026 Technical Papers"
-    venue: "SIGGRAPH"
-    year: 2026
-    url: "https://s2026.siggraph.org/program/technical-papers/"
-    parser: "generic"
-    structure_type: "variable"
-    use_llm: true
-    enabled: false
-    search_query: "SIGGRAPH 2026 technical papers accepted list official"
+- enabled: true
+  name: ECCV 2026 ECVA Papers
+  parser: ecva
+  structure_type: stable
+  url: https://www.ecva.net/papers.php
+  use_llm: false
+  venue: ECCV
+  year: 2026
+- enabled: true
+  name: CVPR 2026 CVF
+  parser: cvf
+  structure_type: stable
+  url: https://openaccess.thecvf.com/CVPR2026?day=all
+  use_llm: false
+  venue: CVPR
+  year: 2026
+- enabled: true
+  name: ICCV 2026 CVF
+  parser: cvf
+  structure_type: stable
+  url: https://openaccess.thecvf.com/ICCV2026?day=all
+  use_llm: false
+  venue: ICCV
+  year: 2026
+- enabled: true
+  name: WACV 2026 CVF
+  parser: cvf
+  structure_type: stable
+  url: https://openaccess.thecvf.com/WACV2026?day=all
+  use_llm: false
+  venue: WACV
+  year: 2026
+- enabled: true
+  name: IJCAI 2026 Proceedings
+  parser: ijcai
+  structure_type: stable
+  url: https://www.ijcai.org/proceedings/2026/
+  use_llm: false
+  venue: IJCAI
+  year: 2026
+- enabled: true
+  name: NeurIPS 2026 Proceedings
+  parser: neurips
+  structure_type: stable
+  url: https://papers.nips.cc/paper_files/paper/2026
+  use_llm: false
+  venue: NeurIPS
+  year: 2026
+- enabled: true
+  name: ECCV 2024 ECVA Papers
+  parser: ecva
+  structure_type: stable
+  url: https://www.ecva.net/papers.php
+  use_llm: false
+  venue: ECCV
+  year: 2024
+- enabled: true
+  name: CVPR 2025 CVF
+  parser: cvf
+  structure_type: stable
+  url: https://openaccess.thecvf.com/CVPR2025?day=all
+  use_llm: false
+  venue: CVPR
+  year: 2025
+- enabled: true
+  name: ICCV 2025 CVF
+  parser: cvf
+  structure_type: stable
+  url: https://openaccess.thecvf.com/ICCV2025?day=all
+  use_llm: false
+  venue: ICCV
+  year: 2025
+- enabled: true
+  name: WACV 2025 CVF
+  parser: cvf
+  structure_type: stable
+  url: https://openaccess.thecvf.com/WACV2025?day=all
+  use_llm: false
+  venue: WACV
+  year: 2025
+- enabled: true
+  name: IJCAI 2025 Proceedings
+  parser: ijcai
+  structure_type: stable
+  url: https://www.ijcai.org/proceedings/2025/
+  use_llm: false
+  venue: IJCAI
+  year: 2025
+- enabled: true
+  name: NeurIPS 2025 Proceedings
+  parser: neurips
+  structure_type: stable
+  url: https://papers.nips.cc/paper_files/paper/2025
+  use_llm: false
+  venue: NeurIPS
+  year: 2025
+- enabled: true
+  name: KDD 2025 Research Track
+  parser: generic
+  search_query: KDD 2025 accepted research papers list official site
+  skip_url_search: true
+  structure_type: variable
+  url: https://kdd2025.kdd.org/research-track-papers/
+  use_llm: true
+  venue: KDD
+  year: 2025
+- enabled: false
+  name: ACM MM 2026 Regular Papers
+  parser: generic
+  search_query: ACM Multimedia MM 2026 accepted regular papers official
+  structure_type: variable
+  url: https://2026.acmmm.org/accepted-regular-papers/
+  use_llm: true
+  venue: ACM MM
+  year: 2026
+- enabled: false
+  name: SIGGRAPH 2026 Technical Papers
+  parser: generic
+  search_query: SIGGRAPH 2026 technical papers accepted list official
+  structure_type: variable
+  url: https://s2026.siggraph.org/program/technical-papers/
+  use_llm: true
+  venue: SIGGRAPH
+  year: 2026
